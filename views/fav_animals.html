@@ -1,13 +1,14 @@
 {% extends "crm_base.html" %} {% block title %}Quote Request submitted successfully!!{% endblock %} {% block content %}
 <div>
-    Thanks for submitting your quote request. We will give you a call shortly!!
 </div> 
 <table>
-{% for key, value in content %}
+{% for item in animals %}
+{% if item.favorite %}
 <tr>
-<td>{{key}}</td>
-<td>{{value}}</td>
+<td>{{item.name}}</td>
+<td>{{item.favorite}}</td>
 </tr>
+{% endif %}
 {% endfor %}
 </table>
 {% endblock %}

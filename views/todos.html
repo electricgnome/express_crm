@@ -1,0 +1,24 @@
+{% extends "base.html" %} {% block content %}
+
+<form action="/todos" method="POST">
+    <label>New Task:</label>
+    <input type="text" name="task">
+    <br>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+
+<br>
+  <form action="#">
+    {% for item in tasks %}
+    <p>
+      <label>
+        <input type="checkbox" />
+        <span>{{item.description}}</span>
+      </label>
+    </p>
+    
+    {% endfor %}
+  </form>
+{% endblock %}
