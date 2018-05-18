@@ -10,15 +10,17 @@
 
 
 <br>
-  <form action="#">
+  <form action="/todos/:done" method="POST">
     {% for item in tasks %}
     <p>
       <label>
-        <input type="checkbox" />
+        <input type="checkbox" value ={{item.id}} name=task>
         <span>{{item.description}}</span>
       </label>
     </p>
     
     {% endfor %}
+    <br>
+    <button type="submit">Submit</button>
   </form>
 {% endblock %}
