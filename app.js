@@ -31,7 +31,7 @@ app.get("/", function (request, response) {
 app.get("/todos", function (request, response) {
   db.any(`SELECT * FROM task WHERE done = FALSE `)
     .then(function (tasks) {
-      console.log(tasks)
+      // console.log(tasks)
       response.render("todos.html", { tasks });
     });
 
@@ -57,16 +57,23 @@ app.post("/todos", function (request, response) {
 
 
 app.post("/todos/:done", function (request, response) {
-  var tasks = request.body.task ;
+  var tasks =0;
+  console.log("len: "+request.body.task.length)
+  if (request.body.task.length = 1){
+    tasks = [request.body.task];
+  }else if (request.body.task.length >1){
+    tasks = request.body.task;
+  }
   console.log(tasks);
-  for (let i = 0; i < tasks.length; i++) {
+  for (let i = 0; i < tasks.length ; i++) {
     db.tx(t => {
       return t.batch([
         t.none('UPDATE task SET done = $1 WHERE id= $2', [true, tasks[i]])
       ]);
-      console.log(tasks[i]);
+      
     })
       .then(data => {
+        console.log("this: "+tasks[i]);
         console.log("Success!")
       })
       .catch(error => {
