@@ -1,26 +1,32 @@
 {% extends "base.html" %} {% block content %}
 
 <form action="/todos" method="POST">
-    <label>New Task:</label>
-    <input type="text" name="task">
-    <br>
-    <br>
-    <button type="submit">Submit</button>
+  <div class="container">
+    <div class="row">
+      <div class="col s12">
+        <div class="input-field inline">
+          <input id="task" type="text" name="task" class="validate">
+          <label for="task">New Task</label>
+        </div>
+        <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
+      </div>
+    </div>
 </form>
 
-
 <br>
-  <form action="/todos/:done" method="POST">
-    {% for item in tasks %}
-    <p>
-      <label>
-        <input type="checkbox" value ={{item.id}} name=task>
-        <span>{{item.description}}</span>
-      </label>
-    </p>
-    
-    {% endfor %}
-    <br>
-    <button type="submit">Submit</button>
-  </form>
+
+<form action="/todos/:done" method="POST">
+  {% for item in tasks %}
+  <p>
+    <label>
+      <input type="checkbox" value={{item.id}} name=task>
+      <span>{{item.description}}</span>
+    </label>
+  </p>
+
+  {% endfor %}
+  <br>
+  <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
+</form>
+</div>
 {% endblock %}
