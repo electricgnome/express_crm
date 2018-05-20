@@ -17,13 +17,29 @@
 
 <form action="/todos/:done" method="POST">
   {% for item in tasks %}
+  {% if item.done == false %}
   <p>
     <label>
-      <input type="checkbox" value={{item.id}} name=task>
+      {# <input type="hidden" value="{{item.id}}" name="id" />
+      <input type="hidden" value="{{item.done}}" name="done" /> #}
+      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name=task>
       <span>{{item.description}}</span>
     </label>
   </p>
-
+  {% endif %}
+  {% endfor %}
+  <br>
+  {% for item in tasks %}
+  {% if item.done %}
+  <p>
+    <label>
+     {# <input type="hidden" value="{{item.id}}" name="id" />
+      <input type="hidden" value="{{item.done}}" name="done" /> #}
+      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name=task>
+      <span><strike>{{item.description}}</strike></span>
+    </label>
+  </p>
+  {% endif %}
   {% endfor %}
   <br>
   <button type="submit" class="waves-effect waves-light btn-small">Submit</button>

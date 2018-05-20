@@ -29,58 +29,59 @@ app.get("/", function (request, response) {
 //Todo APP
 
 app.get("/todos", function (request, response) {
-  db.any(`SELECT * FROM task WHERE done = FALSE `)
+  db.any(`SELECT * FROM task `)
     .then(function (tasks) {
       // console.log(tasks)
       response.render("todos.html", { tasks });
+      // response.json({tasks: tasks})
     });
 
 });
 
-app.post("/todos", function (request, response) {
+app.post("/todos", function (request, response, next) {
   var new_task = request.body.task;
   if (new_task != '') {
     db.none(`INSERT INTO task(description, done) VALUES($1, $2)`, [request.body.task, false])
       .then(() => {
-        console.log("Success!")
+        console.log("Success!");
+        response.redirect("/todos");
       })
-      .catch(error => {
-        console.log('ERROR:', error);
-      })
+      .catch(next);
   }
   console.log(request.body.task);
-
-
-  response.redirect("/todos");
 });
 
 
 
-app.post("/todos/:done", function (request, response) {
-  var tasks =0;
-  console.log("len: "+request.body.task.length)
-  if (request.body.task.length = 1){
-    tasks = [request.body.task];
-  }else if (request.body.task.length >1){
-    tasks = request.body.task;
+app.post("/todos/:done", function (request, response, next) {
+
+
+  var tasks = request.body.task
+  console.log(tasks)
+  if (typeof tasks === 'string') {
+    tasks = [tasks]
+  }else if (typeof tasks === 'undefined'){
+    tasks=[0]
   }
-  console.log(tasks);
+  tasks = tasks.map(JSON.parse)
+
+  console.log(tasks)
+  console.log('==================================')
+
+  var promises = [];
   for (let i = 0; i < tasks.length ; i++) {
-    db.tx(t => {
-      return t.batch([
-        t.none('UPDATE task SET done = $1 WHERE id= $2', [true, tasks[i]])
-      ]);
-      
-    })
-      .then(data => {
-        console.log("this: "+tasks[i]);
-        console.log("Success!")
-      })
-      .catch(error => {
-        console.log('ERROR:', error);
-      })
+    var status = !tasks[i].status;
+    var p = db.query('UPDATE task SET done = $1 WHERE id= $2', [status, tasks[i].id]);
+    promises.push(p);
   }
-  response.redirect("/todos");
+
+  Promise.all(promises)
+    .then(data => {
+      console.log("~~Success!~~")
+      response.redirect("/todos");
+      // response.json({success: true})
+    })
+    .catch(next);
 });
 
 app.listen(8000, function () {
