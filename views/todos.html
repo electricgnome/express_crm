@@ -4,45 +4,72 @@
   <div class="container">
     <div class="row">
       <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn-small"><i class="large material-icons">add_circle_outline</i></button>
         <div class="input-field inline">
           <input id="task" type="text" name="task" class="validate">
           <label for="task">New Task</label>
         </div>
-        <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
+        
       </div>
     </div>
 </form>
 
 <br>
 
-<form action="/todos/:done" method="POST">
+<form action="/todos/:done" method="POST"> 
+<div class = "row">         
   {% for item in tasks %}
   {% if item.done == false %}
+  
+  <div class ="col s10 ">
   <p>
-    <label>
-      {# <input type="hidden" value="{{item.id}}" name="id" />
-      <input type="hidden" value="{{item.done}}" name="done" /> #}
-      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name=task>
+  <label>
+      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name="task">
       <span>{{item.description}}</span>
-    </label>
-  </p>
+ </label>
+ </p>
+ </div>
+    <div class ="col s1 ">
+     <span>someone</span>
+    </div>
+    <div class ="col s1 ">
+    <a class="btn" value='{{item.id}}' id="del_task" ><i class="small material-icons">delete_forever</i></a>
+    </div>
   {% endif %}
   {% endfor %}
+  </div>
   <br>
+  <div class="divider"></div>
+  <br>
+  <div class = "row">
   {% for item in tasks %}
   {% if item.done %}
-  <p>
+  
+  <div class ="col s10 ">
+   <p>
     <label>
-     {# <input type="hidden" value="{{item.id}}" name="id" />
-      <input type="hidden" value="{{item.done}}" name="done" /> #}
-      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name=task>
-      <span><strike>{{item.description}}</strike></span>
+      <td><input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name="task">
+      <span><strike>{{item.description}}</strike> </span>
     </label>
-  </p>
+    </p>
+    </div>
+    <div class ="col s1 ">
+    <span>someone</span>
+    </div>
+    <div class ="col s1 ">
+    <a class="btn" value='{{item.id}}' id="del_task"><i class="small material-icons">delete_forever</i></a>
+    </div>
   {% endif %}
   {% endfor %}
+  </div>
   <br>
+  <div>
   <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
+  </div>
 </form>
 </div>
 {% endblock %}
+
+
+{# <input type="hidden" value="{{item.id}}" name="id" />
+      <input type="hidden" value="{{item.done}}" name="done" /> #}

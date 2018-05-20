@@ -48,6 +48,7 @@ app.post("/todos", function (request, response, next) {
       })
       .catch(next);
   }
+  response.redirect("/todos");
   console.log(request.body.task);
 });
 
@@ -84,6 +85,12 @@ app.post("/todos/:done", function (request, response, next) {
     .catch(next);
 });
 
+
+
+
 app.listen(8000, function () {
   console.log("Listening on port 8000");
 });
+
+
+
