@@ -57,7 +57,6 @@ app.post("/todos", function (request, response, next) {
 app.post("/todos/:done", function (request, response, next) {
 
   var tasks = request.body.task
-  console.log(tasks)
   if (typeof tasks === 'string') {
     tasks = [tasks]
   } else if (typeof tasks === 'undefined') {
@@ -65,38 +64,31 @@ app.post("/todos/:done", function (request, response, next) {
   }
   tasks = tasks.map(JSON.parse)
 
-  console.log(tasks)
-  console.log('==================================')
-
   var promises = [];
 
-  if (request.body.action == "done"){
-  
-  for (let i = 0; i < tasks.length; i++) {
-    var status = !tasks[i].status;
-    var p = db.query('UPDATE task SET done = $1 WHERE id= $2', [status, tasks[i].id]);
-    promises.push(p);
-  }
+  if (request.body.action == "done") {
 
-  
-  }else if (request.body.action == "remove"){
-    
+    for (let i = 0; i < tasks.length; i++) {
+      var status = !tasks[i].status;
+      var p = db.query('UPDATE task SET done = $1 WHERE id= $2', [status, tasks[i].id]);
+      promises.push(p);
+    }
+
+  } else if (request.body.action == "remove") {
+
     for (let i = 0; i < tasks.length; i++) {
       var status = !tasks[i].status;
       var p = db.query('DELETE FROM task WHERE id = $1', [tasks[i].id]);
       promises.push(p);
     }
   }
-
   Promise.all(promises)
     .then(data => {
-      console.log("~~Success!~~")
       response.redirect("/todos");
       // response.json({success: true})
     })
     .catch(next);
 });
-
 
 
 app.listen(8000, function () {
