@@ -6,17 +6,15 @@
       <div class="col s12">
           <button type="submit" class="waves-effect waves-light btn-small"><i class="large material-icons">add_circle_outline</i></button>
         <div class="input-field inline">
-          <input id="task" type="text" name="task" class="validate">
-          <label for="task">New Task</label>
+          <input id="n_task" type="text" name="n_task" class="validate">
+          <label for="n_task">New Task</label>
         </div>
         
       </div>
     </div>
-</form>
 
 <br>
 
-<form action="/todos/:done" method="POST"> 
 <div class = "row">         
   {% for item in tasks %}
   {% if item.done == false %}
@@ -33,7 +31,7 @@
      <span>someone</span>
     </div>
     <div class ="col s1 ">
-    <a class="btn" value='{{item.id}}' id="del_task" ><i class="small material-icons">delete_forever</i></a>
+    
     </div>
   {% endif %}
   {% endfor %}
@@ -57,14 +55,14 @@
     <span>someone</span>
     </div>
     <div class ="col s1 ">
-    <a class="btn" value='{{item.id}}' id="del_task"><i class="small material-icons">delete_forever</i></a>
     </div>
   {% endif %}
   {% endfor %}
   </div>
   <br>
   <div>
-  <button type="submit" class="waves-effect waves-light btn-small">Submit</button>
+  <button class="waves-effect waves-light btn-small" type="submit" name= "action" value="done" formaction="/todos/:done">Submit</button>
+  <button class="waves-effect waves-light btn-small" type="submit" name= "action" value="remove" formaction="/todos/:done"><i class="small material-icons">delete_forever</i></button>  
   </div>
 </form>
 </div>

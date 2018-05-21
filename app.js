@@ -23,7 +23,7 @@ nunjucks.configure("views", {
 });
 
 app.get("/", function (request, response) {
-  response.redirect("/todo");
+  response.redirect("/todos");
 });
 
 //Todo APP
@@ -39,30 +39,29 @@ app.get("/todos", function (request, response) {
 });
 
 app.post("/todos", function (request, response, next) {
-  var new_task = request.body.task;
+  var new_task = request.body.n_task;
   if (new_task != '') {
-    db.none(`INSERT INTO task(description, done) VALUES($1, $2)`, [request.body.task, false])
+    db.none(`INSERT INTO task(description, done) VALUES($1, $2)`, [request.body.n_task, false])
       .then(() => {
         console.log("Success!");
         response.redirect("/todos");
       })
       .catch(next);
+  } else {
+    response.redirect("/todos");
+    console.log("this: " + request.body.n_task);
   }
-  response.redirect("/todos");
-  console.log(request.body.task);
+
 });
 
-
-
 app.post("/todos/:done", function (request, response, next) {
-
 
   var tasks = request.body.task
   console.log(tasks)
   if (typeof tasks === 'string') {
     tasks = [tasks]
-  }else if (typeof tasks === 'undefined'){
-    tasks=[0]
+  } else if (typeof tasks === 'undefined') {
+    tasks = [0]
   }
   tasks = tasks.map(JSON.parse)
 
@@ -70,10 +69,23 @@ app.post("/todos/:done", function (request, response, next) {
   console.log('==================================')
 
   var promises = [];
-  for (let i = 0; i < tasks.length ; i++) {
+
+  if (request.body.action == "done"){
+  
+  for (let i = 0; i < tasks.length; i++) {
     var status = !tasks[i].status;
     var p = db.query('UPDATE task SET done = $1 WHERE id= $2', [status, tasks[i].id]);
     promises.push(p);
+  }
+
+  
+  }else if (request.body.action == "remove"){
+    
+    for (let i = 0; i < tasks.length; i++) {
+      var status = !tasks[i].status;
+      var p = db.query('DELETE FROM task WHERE id = $1', [tasks[i].id]);
+      promises.push(p);
+    }
   }
 
   Promise.all(promises)
@@ -84,7 +96,6 @@ app.post("/todos/:done", function (request, response, next) {
     })
     .catch(next);
 });
-
 
 
 
