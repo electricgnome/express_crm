@@ -1,6 +1,7 @@
 
+
 function materialize() {
-    $('.modal').modal();    
+    $('.modal').modal();
     $(".datepicker").datepicker({
         yearRange: 90
     });
@@ -11,11 +12,13 @@ function materialize() {
     $(".sidenav").sidenav();
 
     $('input.counter').characterCounter();
+
 }
 
 
-
 $(window).on("load", function () {
-    
-    materialize();   
+
+    console.log("YAY!!")
+    materialize();
 });
+

@@ -1,9 +1,9 @@
 {% extends "base.html" %} {% block content %}
-
+ 
 <form action="/todos" method="POST">
   <div class="container" style="background-color: white">
     <div class="row">
-      <div class="col s12">
+      <div class="col s6">
           <button type="submit" class="waves-effect waves-light btn-small"><i class="large material-icons">add_circle_outline</i></button>
         <div class="input-field inline">
           <input id="n_task" type="text" name="n_task" class="validate">
@@ -11,19 +11,28 @@
         </div>
         
       </div>
+      <div class="input-field col s6">
+    <select>
+      <option value="" disabled selected>Choose your option</option>
+      <option value="2">Hector</option>
+      <option value="3">Emy</option>
+      <option value="4">Perla</option>
+    </select>
+    <label>Select Agent</label>
+  </div>
     </div>
 
 <br>
 
 <div class = "row">         
   {% for item in tasks %}
-  {% if item.done == false %}
+  {% if item.status == false %}
   
   <div class ="col s10 ">
   <p>
   <label>
-      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name="task">
-      <span>{{item.description}}</span>
+      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
+      <span>{{item.name}}</span>
  </label>
  </p>
  </div>
@@ -41,13 +50,13 @@
   <br>
   <div class = "row">
   {% for item in tasks %}
-  {% if item.done %}
+  {% if item.status %}
   
   <div class ="col s10 ">
    <p>
     <label>
-      <td><input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name="task">
-      <span><strike>{{item.description}}</strike> </span>
+      <td><input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
+      <span><strike>{{item.name}}</strike> </span>
     </label>
     </p>
     </div>

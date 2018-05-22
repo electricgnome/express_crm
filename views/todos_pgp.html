@@ -17,13 +17,13 @@
 
 <div class = "row">         
   {% for item in tasks %}
-  {% if item.status == false %}
+  {% if item.done == false %}
   
   <div class ="col s10 ">
   <p>
   <label>
-      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
-      <span>{{item.name}}</span>
+      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name="task">
+      <span>{{item.description}}</span>
  </label>
  </p>
  </div>

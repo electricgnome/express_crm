@@ -1,18 +1,14 @@
+// converted to use sequelize instead of pgp
 const express = require("express");
 const nunjucks = require("nunjucks");
 const body_parser = require("body-parser");
 const jsonfile = "/src/file.json";
-
+// const myscript = require('/main.js')
 const Promise = require('bluebird');
-const pgp = require('pg-promise')({
-  promiseLib: Promise
-});
 
-const dbConfig = require('./db-config');
-const db = pgp(dbConfig);
 let connection;
 
-// const db = require('./models'); //for use with sequelize
+const db = require('./models'); //for use with sequelize
 
 const app = express();
 
@@ -32,9 +28,9 @@ app.get("/", function (request, response) {
 //Todo APP
 
 app.get("/todos", function (request, response) {
-  db.any(`SELECT * FROM task `)
-    .then(function (tasks) {
-      // console.log(tasks)
+  db.task.findAll()
+    .then((tasks) => {
+
       response.render("todos.html", { tasks });
       // response.json({tasks: tasks})
     });
@@ -44,9 +40,9 @@ app.get("/todos", function (request, response) {
 app.post("/todos", function (request, response, next) {
   var new_task = request.body.n_task;
   if (new_task != '') {
-    db.none(`INSERT INTO task(description, done) VALUES($1, $2)`, [request.body.n_task, false])
-      .then(() => {
-        console.log("Success!");
+    db.task.create({ name: request.body.n_task, due: '2018-05-30T11:59:00', status: false })
+      .then(task => {
+        console.log(task.get('name'));
         response.redirect("/todos");
       })
       .catch(next);
@@ -72,30 +68,30 @@ app.post("/todos/:done", function (request, response, next) {
   if (request.body.action == "done") {
 
     for (let i = 0; i < tasks.length; i++) {
-      var status = !tasks[i].status;
-      var p = db.query('UPDATE task SET done = $1 WHERE id= $2', [status, tasks[i].id]);
-      promises.push(p);
-    }
+      var stat = !tasks[i].status;
+      var p = db.task.update({ status: stat }, { where: { id: tasks[i].id } })
+        promises.push(p);
+    };
+    } else if (request.body.action == "remove") {
 
-  } else if (request.body.action == "remove") {
-
-    for (let i = 0; i < tasks.length; i++) {
-      var status = !tasks[i].status;
-      var p = db.query('DELETE FROM task WHERE id = $1', [tasks[i].id]);
-      promises.push(p);
+      for (let i = 0; i < tasks.length; i++) {
+        var stat = !tasks[i].status;
+        var  p= db.task.destroy({ where: { id: tasks[i].id } })
+          promises.push(p);
+         
     }
   }
-  Promise.all(promises)
-    .then(data => {
-      response.redirect("/todos");
-      // response.json({success: true})
-    })
-    .catch(next);
-});
+    Promise.all(promises)
+    .then((result)=> {
+        response.redirect("/todos");
+        // response.json({success: true})
+      })
+      .catch(next);
+  });
 
 
-app.listen(8000, function () {
-  console.log("Listening on port 8000");
+app.listen(8800, function () {
+  console.log("Listening on port 8800");
 });
 
 
