@@ -3,15 +3,17 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.addColumn(
-      'users',
-      'nickname',
+      'tasks',
+      'status',
       {
-        type: Sequelize.STRING
+        type: Sequelize.BOOLEAN
       }
     );
+   
   },
+
   down: (queryInterface, Sequelize) => {
     return queryInterface.removeColumn(
-              'users', 'nickname');
+      'tasks', 'status');
   }
 };

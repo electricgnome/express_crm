@@ -1,0 +1,75 @@
+{% extends "base.html" %} {% block content %}
+
+<form action="/todos" method="POST">
+  <div class="container" style="background-color: white">
+    <div class="row">
+      <div class="col s12">
+          <button type="submit" class="waves-effect waves-light btn-small"><i class="large material-icons">add_circle_outline</i></button>
+        <div class="input-field inline">
+          <input id="n_task" type="text" name="n_task" class="validate">
+          <label for="n_task">New Task</label>
+        </div>
+        
+      </div>
+    </div>
+
+<br>
+
+<div class = "row">         
+  {% for item in tasks %}
+  {% if item.status == false %}
+  
+  <div class ="col s10 ">
+  <p>
+  <label>
+      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
+      <span>{{item.name}}</span>
+ </label>
+ </p>
+ </div>
+    <div class ="col s1 ">
+     <span>someone</span>
+    </div>
+    <div class ="col s1 ">
+    
+    </div>
+  {% endif %}
+  {% endfor %}
+  </div>
+  <br>
+  <div class="divider"></div>
+  <br>
+  <div class = "row">
+  {% for item in tasks %}
+  {% if item.done %}
+  
+  <div class ="col s10 ">
+   <p>
+    <label>
+      <td><input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.done}} }' name="task">
+      <span><strike>{{item.description}}</strike> </span>
+    </label>
+    </p>
+    </div>
+    <div class ="col s1 ">
+    <span>someone</span>
+    </div>
+    <div class ="col s1 ">
+    </div>
+  {% endif %}
+  {% endfor %}
+  </div>
+  <br>
+  <div class="row">
+  <div class ="col s12 ">
+  <button class="waves-effect waves-light btn-small" type="submit" name= "action" value="done" formaction="/todos/:done">Submit</button>
+  <button class="waves-effect waves-light btn-small" type="submit" name= "action" value="remove" formaction="/todos/:done"><i class="small material-icons">delete_forever</i></button>  
+  </div></div>
+  <div class="row"><div class ="col s10 "></div></div>
+</form>
+</div>
+{% endblock %}
+
+
+{# <input type="hidden" value="{{item.id}}" name="id" />
+      <input type="hidden" value="{{item.done}}" name="done" /> #}

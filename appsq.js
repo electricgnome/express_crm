@@ -4,15 +4,10 @@ const body_parser = require("body-parser");
 const jsonfile = "/src/file.json";
 
 const Promise = require('bluebird');
-const pgp = require('pg-promise')({
-  promiseLib: Promise
-});
 
-const dbConfig = require('./db-config');
-const db = pgp(dbConfig);
 let connection;
 
-// const db = require('./models'); //for use with sequelize
+const db = require('./models'); //for use with sequelize
 
 const app = express();
 
@@ -32,10 +27,10 @@ app.get("/", function (request, response) {
 //Todo APP
 
 app.get("/todos", function (request, response) {
-  db.any(`SELECT * FROM task `)
-    .then(function (tasks) {
-      // console.log(tasks)
-      response.render("todos.html", { tasks });
+  db.task.findAll()
+    .then((tasks)=> {
+    
+      response.render("todos2.html", { tasks });
       // response.json({tasks: tasks})
     });
 
@@ -44,9 +39,9 @@ app.get("/todos", function (request, response) {
 app.post("/todos", function (request, response, next) {
   var new_task = request.body.n_task;
   if (new_task != '') {
-    db.none(`INSERT INTO task(description, done) VALUES($1, $2)`, [request.body.n_task, false])
-      .then(() => {
-        console.log("Success!");
+    db.task.create({name:request.body.n_task, due:'2018-05-30T11:59:00', status: false })
+      .then(task => {
+        console.log(task.get('name'));
         response.redirect("/todos");
       })
       .catch(next);
@@ -73,7 +68,7 @@ app.post("/todos/:done", function (request, response, next) {
 
     for (let i = 0; i < tasks.length; i++) {
       var status = !tasks[i].status;
-      var p = db.query('UPDATE task SET done = $1 WHERE id= $2', [status, tasks[i].id]);
+      var p = db.task.update('UPDATE task SET done = $1 WHERE id= $2', [status, tasks[i].id]);
       promises.push(p);
     }
 
@@ -94,8 +89,8 @@ app.post("/todos/:done", function (request, response, next) {
 });
 
 
-app.listen(8000, function () {
-  console.log("Listening on port 8000");
+app.listen(8800, function () {
+  console.log("Listening on port 8800");
 });
 
 
