@@ -1,84 +1,98 @@
 {% extends "base.html" %} {% block content %}
- 
+
 <form action="/todos" method="POST">
   <div class="container" style="background-color: white">
     <div class="row">
-      <div class="col s6">
-          <button type="submit" class="waves-effect waves-light btn-small"><i class="large material-icons">add_circle_outline</i></button>
+      <br>
+    </div>
+    <div class="row">
+      <div class="col s4">
+        <button type="submit" class="waves-effect waves-light btn-small">
+          <i class="large material-icons">add_circle_outline</i>
+        </button>
         <div class="input-field inline">
           <input id="n_task" type="text" name="n_task" class="validate">
           <label for="n_task">New Task</label>
         </div>
-        
+
       </div>
-      <div class="input-field col s6">
-    <select>
-      <option value="" disabled selected>Choose your option</option>
-      <option value="2">Hector</option>
-      <option value="3">Emy</option>
-      <option value="4">Perla</option>
-    </select>
-    <label>Select Agent</label>
-  </div>
+      <div class="input-field col s4">
+        <select name="agent">
+          <option value="" disabled selected>Choose your option</option>
+          <option value="2">Hector</option>
+          <option value="3">Emy</option>
+          <option value="4">Perla</option>
+        </select>
+
+        <label>Select Agent</label>
+      </div>
+      <div class="input-field col s4">
+        <input type="text" class="datepicker" name="date">
+        <label>Task Due</label>
+      </div>
+
     </div>
 
-<br>
+    <br>
 
-<div class = "row">         
-  {% for item in tasks %}
-  {% if item.status == false %}
-  
-  <div class ="col s10 ">
-  <p>
-  <label>
-      <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
-      <span>{{item.name}}</span>
- </label>
- </p>
- </div>
-    <div class ="col s1 ">
-     <span>someone</span>
+    <div class="row">
+      {% for item in tasks %} {% if item.status == false %}
+
+      <div class="col s8 ">
+        <p>
+          <label>
+            <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
+            <span>{{item.name}}</span>
+          </label>
+        </p>
+      </div>
+      <div class="col s1 ">
+        <span>{{item.user.firstName}}</span>
+      </div>
+      <div class="col s2 ">
+        <span>{{item.due.toDateString()}}</span>
+      </div>
+      {% endif %} {% endfor %}
     </div>
-    <div class ="col s1 ">
-    
+    <br>
+    <div class="divider"></div>
+    <br>
+    <div class="row">
+      {% for item in tasks %} {% if item.status %}
+
+      <div class="col s8">
+        <p>
+          <label>
+            <td>
+              <input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
+              <span>
+                <strike>{{item.name}}</strike>
+              </span>
+          </label>
+        </p>
+      </div>
+      <div class="col s1 ">
+        <span>{{item.user.firstName}}</span>
+      </div>
+      <div class="col s2 ">
+        <span>{{item.updatedAt.toDateString()}}</span>
+      </div>
+      {% endif %} {% endfor %}
     </div>
-  {% endif %}
-  {% endfor %}
-  </div>
-  <br>
-  <div class="divider"></div>
-  <br>
-  <div class = "row">
-  {% for item in tasks %}
-  {% if item.status %}
-  
-  <div class ="col s10 ">
-   <p>
-    <label>
-      <td><input type="checkbox" value='{"id" : {{item.id}}, "status" : {{item.status}} }' name="task">
-      <span><strike>{{item.name}}</strike> </span>
-    </label>
-    </p>
+    <br>
+    <div class="row">
+      <div class="col s12 ">
+        <button class="waves-effect waves-light btn-small" type="submit" name="action" value="done" formaction="/todos/:done">Submit</button>
+        <button class="waves-effect waves-light btn-small" type="submit" name="action" value="remove" formaction="/todos/:done">
+          <i class="small material-icons">delete_forever</i>
+        </button>
+      </div>
     </div>
-    <div class ="col s1 ">
-    <span>someone</span>
+    <div class="row">
+      <div class="col s10 "></div>
     </div>
-    <div class ="col s1 ">
-    </div>
-  {% endif %}
-  {% endfor %}
-  </div>
-  <br>
-  <div class="row">
-  <div class ="col s12 ">
-  <button class="waves-effect waves-light btn-small" type="submit" name= "action" value="done" formaction="/todos/:done">Submit</button>
-  <button class="waves-effect waves-light btn-small" type="submit" name= "action" value="remove" formaction="/todos/:done"><i class="small material-icons">delete_forever</i></button>  
-  </div></div>
-  <div class="row"><div class ="col s10 "></div></div>
 </form>
 </div>
-{% endblock %}
-
-
-{# <input type="hidden" value="{{item.id}}" name="id" />
-      <input type="hidden" value="{{item.done}}" name="done" /> #}
+{% endblock %} {#
+<input type="hidden" value="{{item.id}}" name="id" />
+<input type="hidden" value="{{item.done}}" name="done" /> #}
