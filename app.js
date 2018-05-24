@@ -4,6 +4,7 @@ const nunjucks = require("nunjucks");
 const body_parser = require("body-parser");
 const jsonfile = "/src/file.json";
 const Promise = require('bluebird');
+const session = require('express-session');
 
 let connection;
 
@@ -14,20 +15,41 @@ const app = express();
 app.use(body_parser.urlencoded({ extended: false }));
 app.use(express.static("public"));
 
+
+var hour = 3600000;
+app.use(session({
+  secret: process.env.SECRET_KEY || 'dev',
+  resave: true,
+  saveUninitialized: false,
+  cookie: {maxAge: 2*hour}
+}));
+
 nunjucks.configure("views", {
   autoescape: true,
   express: app,
   noCache: true
 });
 
-app.get("/", function (request, response) {
-  response.redirect("/todos");
+app.use(function (request, response, next) {
+  if (request.session.user) {
+    next();
+  } else if (request.path == '/login') {
+    next();
+  } else {
+    response.redirect('/login');
+  }
 });
+
+
 app.get("/login", function (request, response) {
   response.render("login.html");
 });
 
 //Todo APPl
+
+app.get("/", function (request, response) {
+  response.redirect("/todos");
+});
 
 app.get("/todos", function (request, response) {
   db.task.findAll({include: [{model: db.user}]})
