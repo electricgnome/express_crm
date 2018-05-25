@@ -19,10 +19,16 @@
   "homepage": "https://github.com/electricgnome/express#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
+    "crypto": "^1.0.1",
     "express": "^4.16.3",
     "express-session": "^1.15.6",
+    "nodemon": "^1.17.5",
     "nunjucks": "^3.1.2",
+    "pbkdf2": "^3.0.16",
+    "pbkdf2-helpers": "^1.1.1",
     "pg-promise": "^8.4.4",
-    "sequelize": "^4.37.8"
+    "sequelize": "^4.37.8",
+    "socket.io": "^2.1.1",
+    "socketio": "^1.0.0"
   }
 }

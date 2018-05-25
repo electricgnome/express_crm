@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- <link rel="stylesheet" type="text/css" media="screen" href="main.css" /> -->
+    <!-- <script src="main.js"></script> -->
+</head>
+
+<script src="/socket-io/socket.io.js"></script>
+<script>
+    var server = io();
+    server.on('connect', function (s) {
+        console.log('connected');
+    });
+
+    server.on('chat-msg', function (msg) {
+        var chat = document.getElementById("chat-box");
+        chat.insertAdjacentHTML('beforeend', '\n' + msg);
+    });
+
+    function send_message(event) {
+        var char = event.which || event.keyCode;
+        if (char == '13') {
+            var msg = document.getElementById("message");
+            server.emit('incoming', msg.value);
+            msg.value = '';
+        }
+    }
+
+
+</script>
+
+<body>
+    <h1>Chat box!</h1>
+
+    <input id="message" onkeypress="send_message(event)">
+    <pre id="chat-box"></pre>
+
+</body>
+
+</html>
