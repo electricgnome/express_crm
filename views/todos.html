@@ -18,16 +18,17 @@
       </div>
       <div class="input-field col s4">
         <select name="agent">
-          <option value="" disabled selected>Choose your option</option>
-          <option value="2">Hector</option>
-          <option value="3">Emy</option>
-          <option value="4">Perla</option>
+          <option value="" disabled selected>agent: </option>
+           {% for user in users %}
+           console.log()
+          <option value='{{user.id}}'>{{user.firstName}}</option>
+          {% endfor %}
         </select>
 
         <label>Select Agent</label>
       </div>
       <div class="input-field col s4">
-        <input type="text" class="datepicker" name="date">
+        <input type="text" class="datepicker1" name="date">
         <label>Task Due</label>
       </div>
 
@@ -93,6 +94,8 @@
     </div>
 </form>
 </div>
-{% endblock %} {#
+{% endblock %} 
+
+{#
 <input type="hidden" value="{{item.id}}" name="id" />
 <input type="hidden" value="{{item.done}}" name="done" /> #}

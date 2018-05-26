@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1"> {% block head %}
   <title>{% block title %}{% endblock %} -Kappa Insurance </title>
   <!-- Compiled and minified CSS -->
-  <link rel="stylesheet" type="text/css" href="../../static/css/main.css">
+  <link rel="stylesheet"  href="css/main.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-  <link rel="shortcut icon" href="static/img/favicon.ico" />
+  <link rel="shortcut icon" href="img/favicon.ico" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"> {% endblock %}
 </head>
@@ -24,14 +24,24 @@
             <i class="material-icons">menu</i>
           </a>
           <ul class="right hide-on-med-and-down">
-            <li>
-              <a href="#">Home</a>
+             <li>
+              <a href="/">Main</a>
             </li>
             <li>
-              <a href="#">Auto Quote Request</a>
+              <a href="/form">Add Customer</a>
             </li>
             <li>
-              <a href="#">Contact Us</a>
+              <a href="/customer">view customer</a>
+            </li>
+            <li>
+                <a href="/todos">Tasks</a>
+              </li>
+            <li>
+              <div  class="input-field col s12">
+                <i class="material-icons prefix">search</i>
+                <input type="text" id="autocomplete-input">
+                <label for="autocomplete-input">Search</label>
+              </div>
             </li>
           </ul>
         </div>

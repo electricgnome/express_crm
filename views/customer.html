@@ -1,0 +1,179 @@
+{% extends "base.html" %} {% block title %}Customer view{% endblock %} {% block content %}
+<!-- multistep form -->
+<div class="container z-depth-5" style="margin-top:20px;">
+
+    <form class="col s6" action="success" method="POST" id="form_update">
+        <div class="card">
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab">
+                        <a href="#details" class="active">Policy Details</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#drivers">Drivers</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#vehicles">Vehicles</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#discounts">Discounts</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- <div class="card-content">
+                Some stuff here
+            </div> -->
+            <div class="card-content grey lighten-4 padding-0">
+               {% include "default_tabs.html" %} 
+
+                <div id="details">
+                    <h5 class="center-align" class="fs-title">Customer/Policy details</h5>
+                    <h6 class="center-align" class="fs-subtitle">Policy and comments</h6>
+                    <div class="row">
+                        <div class="input-field col s6 offset-m3 m3">
+                            <select name="pref_language" id="pref_language">
+                                <option value="" disabled selected>Preffered Language</option>
+                                <option value="English">English</option>
+                                <option value="Spanish">Spanish</option>
+                            </select>
+                            <label>Preferred language</label>
+                        </div>
+
+                        <div class="input-field col s6  m3">
+                            <select name="agent" id="agent">
+                                <option value="" disabled selected>Selling Agent</option>
+                                <option value="Emy">Emy</option>
+                                <option value="Perla">Perla</option>
+                                <option value="Hector">Hector</option>
+                            </select>
+                            <label for="agent">Agent</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6 offset-m3 m3">
+                            <select name="status" id="status">
+                                <option value="" disabled selected>Policy Status</option>
+                                <option value="quote">Quote</option>
+                                <option value="paid">Paid</option>
+                                <option value="unpaid">Unpaid</option>
+                                <option value="auto-pay">Auto-pay</option>
+                                <option value="cancelled">Cancelled</option>
+                            </select>
+                            <label for="status">Policy Status</label>
+                        </div>
+
+                        <div class="input field col s6 m3">
+                            <label>Customer Rating</label>
+                            <span class="starRating">
+                                <input id="rating5" type="radio" name="rating" value="5">
+                                <label for="rating5">5</label>
+                                <input id="rating4" type="radio" name="rating" value="4">
+                                <label for="rating4">4</label>
+                                <input id="rating3" type="radio" name="rating" value="3">
+                                <label for="rating3">3</label>
+                                <input id="rating2" type="radio" name="rating" value="2">
+                                <label for="rating2">2</label>
+                                <input id="rating1" type="radio" name="rating" value="1">
+                                <label for="rating1">1</label>
+                            </span>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s6 offset-m3 m3">
+                            <input name="dealer" id="dealer" type="text">
+                            <label for="dealer">Dealer</label>
+                        </div>
+                        <div class="input-field col s6  m3">
+                            <input name="seller" id="seller" type="text">
+                            <label for="seller">Sales Person</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="input-field col s6 offset-m3 m3">
+                            <input name="lienholder" id="lienholder" type="text">
+                            <label for="lienholder">Lien Holder</label>
+                        </div>
+                        <div class="input-field col s6  m3">
+                            <input name="lh_phone" id="lh_phone" type="text" class="counter" data-length="10">
+                            <label for="lh_phone">Phone/Fax</label>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+
+                    <div class="row">
+                        <div class=" input-field col s6 offset-m3 m3 ">
+                            <select name="carrier" id="carrier">
+                                <option class="flow-text" value="" disabled selected>carrier</option>
+                                <option value="progressive">Progressive</option>
+                                <option value="infinity">Infinity</option>
+                                <option value="empower">Empower</option>
+                                <option value="foremost">Foremost</option>
+                                <option value="mercury">Mercury</option>
+                                <option value="hallmark">Hallmark</option>
+                            </select>
+                            <label>Carrier:</label>
+                        </div>
+
+                        <div class="input-field col s6 m3">
+                            <input name="policy_number" id="policy_number" type="text" class="counter" data-length="20">
+                            <label for="policy_number" class>Policy Number</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class=" input-field col s6 offset-m3 m3 ">
+                            <input name="premium_amt" id="premium_amt" type="text">
+                            <label for="premium_amt" class>Premium</label>
+                        </div>
+
+                        <div class="input-field col s6 m3">
+                            <input name="payment_date" id="payment_date" type="text" class="datepicker">
+                            <label for="payment_date" class>Payment Date</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="divider"></div>
+                        <div class=" input-field col s6 offset-m3 m3 ">
+
+                            <select name="q_carrier" id="q_carrier">
+                                <option class="flow-text" value="" disabled selected>carrier</option>
+                                <option value="progressive">Progressive</option>
+                                <option value="infinity">Infinity</option>
+                                <option value="empower">Empower</option>
+                                <option value="foremost">Foremost</option>
+                                <option value="mercury">Mercury</option>
+                                <option value="hallmark">Hallmark</option>
+                            </select>
+                            <label>Quote Carrier:</label>
+                        </div>
+
+                        <div class="input-field col s6 m3">
+                            <input name="quote_number" id="quote_number" type="text" class="counter" data-length="20">
+                            <label for="quote_number" class>Quote Number</label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class=" input-field col s6 offset-m3 m3 ">
+                            <input name="down" id="down" type="text">
+                            <label for="down" class>Down Payment</label>
+                        </div>
+                    </div>
+                    <div class="divider"></div>
+                    <div class="row">
+                        <div class="input-field col s10 offset-m1 ">
+                            <textarea id="notes" class="materialize-textarea"></textarea>
+                            <label for="notes">Notes/Tasks</label>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </form>
+</div>
+
+
+{% endblock %}
