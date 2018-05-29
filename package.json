@@ -19,6 +19,7 @@
   "homepage": "https://github.com/electricgnome/express#readme",
   "dependencies": {
     "bluebird": "^3.5.1",
+    "connect-redis": "^3.3.3",
     "connect-session-sequelize": "^5.2.1",
     "cookie-parser": "^1.4.3",
     "crypto": "^1.0.1",

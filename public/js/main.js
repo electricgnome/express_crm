@@ -309,7 +309,7 @@ $(window).on("load", function () {
                 <div class="row">
                     <div class="input field col s3 offset-m3 m3">
                         <input type="text" id="VIN${cars}" name="VIN${cars}" placeholder="(VIN) Vehicle Identification Number"   class="counter" data-length="17" required />
-                        <label for="VIN${cars}">(VIN) Vehicle Identification Number</label>
+                        <!-- <label for="VIN${cars}">(VIN) Vehicle Identification Number</label> -->
                     </div>
                     <div class="col s3 offset-m1 m3">
                         <a class="btn waves-effect waves-light" name="verify_vin" id="verify_vin${cars}" value="${cars}" >verify VIN
@@ -334,49 +334,65 @@ $(window).on("load", function () {
                     <h5 class="center-align">Coverage</h5>
                     <h6 class="center-align">How much coverage do you want?</h6>
                     <div class="row">
-                        <span id="selects">Desired coverage:
-                            <br>
+                        <div class="input-field col s6 offset-m2 m4">
                             <select name="coverage${cars}" id="selects_field" value="${cars}">
-                                <option value="liability">Liability Only</option>
+
+                                <option value="liability" selected>Liability Only</option>
                                 <option value="full_coverage">Comprihensive/Collision(Full Coverage)</option>
                             </select>
-                        </span>
+                            <label>How much coverage do you want:</label>
+                        </div>
+
+                        
                     </div>
                     <div class="optional" id="full_cover${cars}">
-                        <span id="selects">Desired Deductible:
-                            <br>
-                            <select name="deductible${cars}" id="selects_field">
-                                <option value="500">$500.00</option>
-                                <option value="1000">$1,000.00</option>
-                            </select>
-                        </span>
+                         <div class="row">
+                            <div class="input-field col s6 offset-m2 m2">
+                                <select name="deductible${cars}" id="selects_field" value="${cars}">
+                                    <option value="500">$500.00</option>
+                                    <option value="1000">$1,000.00</option>
+                                    <option value="0" selected>None</option>
+                                </select>
+                                <label>Desired Deductible:</label>
+                            </div>
+                        </div>
 
                         <div style="text-align:left">
                             <br>
                             <h5 class="center-align">Additional coverage:</h5>
                             <br>
+                            <div class="row">
+                            <div class="input-field col s6 offset-m2 m4">
+                            <p>
                             <label>
                                 <input type="checkbox" name="pip_flag${cars}" value="1">
                                 <span>Personal Injury Protection (PIP)</span>
-                            </label>
+                            </label></p>
                             <br>
+                            <p>
                             <label>
                                 <input type="checkbox" name="uninsured_motor_flag${cars}" value="1">
                                 <span>Uninsured Motorist</span>
-                            </label>
-                            <br>
+                            </label></p>
+                            </div>
+
+                            <div class="input-field col s6 m4">
+                            <p>
                             <label>
                                 <input type="checkbox" name="rental_flag${cars}" value="1">
                                 <span>Rental</span>
-                            </label>
+                            </label></p>
                             <br>
+                            <p>
                             <label>
                                 <input type="checkbox" name="towing_flag${cars}" value="1">
                                 <span>Towing</span>
                             </label>
+                            </p>
                         </div>
                     </div>
-
+                </div>
+            </div>
 
                 </div>
             </div>

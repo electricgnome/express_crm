@@ -5,6 +5,9 @@ body_parser = require("body-parser");
 jsonfile = "/src/file.json";
 const Promise = require("bluebird");
 session = require("express-session");
+// redis = require("redis"),
+// client = redis.createClient();
+RedisStore = require("connect-redis")(session);
 pbkdf2 = require("pbkdf2");
 passhelper = require('pbkdf2-helpers');
 crytpo = require("crypto");
@@ -22,6 +25,7 @@ app.use(express.static("public"));
 var hour = 3600000;
 app.use(
   session({
+    // store: new RedisStore(),
     secret: process.env.SECRET_KEY || "dev",
     resave: true,
     saveUninitialized: false,
@@ -35,17 +39,17 @@ nunjucks.configure("views", {
   noCache: true
 });
 
-app.use(function(request, response, next) {
-  if (request.session.user) {
-    next();
-  } else if (request.path == "/login") {
-    next();
-  } else if (request.path == "/register") {
-    next();
-  } else {
-    response.redirect("/login");
-  }
-});
+// app.use(function(request, response, next) {
+//   if (request.session.user) {
+//     next();
+//   } else if (request.path == "/login") {
+//     next();
+//   } else if (request.path == "/register") {
+//     next();
+//   } else {
+//     response.redirect("/login");
+//   }
+// });
 
 app.get("/register", function(request, response) {
   response.render("register.html");
