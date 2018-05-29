@@ -35,17 +35,17 @@ nunjucks.configure("views", {
   noCache: true
 });
 
-// app.use(function(request, response, next) {
-//   if (request.session.user) {
-//     next();
-//   } else if (request.path == "/login") {
-//     next();
-//   } else if (request.path == "/register") {
-//     next();
-//   } else {
-//     response.redirect("/login");
-//   }
-// });
+app.use(function(request, response, next) {
+  if (request.session.user) {
+    next();
+  } else if (request.path == "/login") {
+    next();
+  } else if (request.path == "/register") {
+    next();
+  } else {
+    response.redirect("/login");
+  }
+});
 
 app.get("/register", function(request, response) {
   response.render("register.html");
@@ -119,7 +119,8 @@ app.get("/customer", function (request, response) {
 
 app.post("/success", function (request, response, next) {
   var data = request.body
-  response.render("success.html", {data});
+  // console.log(data.first_name1)
+  response.render("success2.html", {data});
 });
 
 

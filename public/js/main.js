@@ -42,15 +42,17 @@ function materialize() {
     });
 
     $(`input[type=radio][name=accident_tickets_flag${drivers}]`).click(function () {
-        if ($(`input[type=radio][name=accident_tickets_flag${drivers}]:checked`).val() == "0") {
-            jQuery(`#accidents${drivers}`).hide();
+        var active_driver = this.getAttribute("acc")
+        console.log("active driver: "+ active_driver)
+        if ($(`input[type=radio][name=accident_tickets_flag${active_driver}]:checked`).val() == "0") {
+            jQuery(`#accidents${active_driver}`).hide();
         } else {
-            jQuery(`#accidents${drivers}`).show();
+            jQuery(`#accidents${active_driver}`).show();
         }
         
     });
 
-    $(`#verify_vin${cars}`).on("click", function () {
+    $(`#verify_vin${cars}`).off().on("click", function () {
       var active_car = this.getAttribute("value")
 
         verify_vin(document.getElementById(`VIN${active_car}`).value, active_car);
@@ -65,7 +67,7 @@ function verify_vin(vin, active_car){
   
   
     
-    console.log("verify vin")
+    console.log("verify vin: "+ active_car)
     vresult; 
     $.ajax({
         url: "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
@@ -219,12 +221,12 @@ $(window).on("load", function () {
 <br> Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
 
 <label>
-    <input class="with-gap" name="accident_tickets_flag${drivers}" type="radio" value="1" />
+    <input class="with-gap" name="accident_tickets_flag${drivers}" acc="${drivers}" type="radio" value="1" />
     <span>Yes</span>
 </label>
 
 <label>
-    <input class="with-gap" name="accident_tickets_flag${drivers}" type="radio" value="0" checked/>
+    <input class="with-gap" name="accident_tickets_flag${drivers}" acc="${drivers}" type="radio" value="0" checked/>
     <span>No</span>
 </label>
 
@@ -270,13 +272,13 @@ $(window).on("load", function () {
     </div>`).insertBefore("#add_div");
 
 
-    $(`input[type=radio][name=accident_tickets_flag${drivers}]`).click(function () {
-        if ($(`input[type=radio][name=accident_tickets_flag${drivers}]:checked`).val() == "0") {
-            jQuery(`#accidents${drivers}`).hide();
-        } else {
-            jQuery(`#accidents${drivers}`).show();
-        }
-    });
+    // $(`input[type=radio][name=accident_tickets_flag${drivers}]`).click(function () {
+    //     if ($(`input[type=radio][name=accident_tickets_flag${drivers}]:checked`).val() == "0") {
+    //         jQuery(`#accidents${drivers}`).hide();
+    //     } else {
+    //         jQuery(`#accidents${drivers}`).show();
+    //     }
+    // });
 
    
         materialize();
@@ -382,13 +384,13 @@ $(window).on("load", function () {
 
     </div>`).insertBefore("#add_car");
 
-    $(`select[name=coverage${cars}]`).change(function () {
-        if ($(`select[name=coverage${cars}][id=selects_field]`).val() == "liability") {
-            jQuery(`#full_cover${cars}`).hide();
-        } else {
-            jQuery(`#full_cover${cars}`).show();
-        }
-    });
+    // $(`select[name=coverage${cars}]`).change(function () {
+    //     if ($(`select[name=coverage${cars}][id=selects_field]`).val() == "liability") {
+    //         jQuery(`#full_cover${cars}`).hide();
+    //     } else {
+    //         jQuery(`#full_cover${cars}`).show();
+    //     }
+    // });
 
         materialize();
         setTimeout(function () {
