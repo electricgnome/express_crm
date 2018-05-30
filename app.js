@@ -11,14 +11,16 @@ RedisStore = require("connect-redis")(session);
 pbkdf2 = require("pbkdf2");
 passhelper = require('pbkdf2-helpers');
 crytpo = require("crypto");
-http = require("http").Server(app);
-io = require("socket.io")(http);
+
 
 let connection;
 
 const db = require("./models"); //for use with sequelize
 
 var app = express();
+
+const http = require("http").Server(app);
+const io = require("socket.io")(http);
 
 app.use(body_parser.urlencoded({ extended: true }));
 app.use(express.static("public"));
@@ -59,6 +61,9 @@ io.on("connection", function(client) {
 });
 //-------------------------
 
+app.get("/chat", function(request, response) {
+  response.render("chat.html");
+});
 
 app.use(function(request, response, next) {
   if (request.session.user) {
