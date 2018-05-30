@@ -20,10 +20,6 @@ nunjucks.configure("views", {
 app.use("/socket-io", express.static("node_modules/socket.io-client/dist"));
 
 
-
-
-
-
 io.on("connection", function(client) {
   console.log("CONNECTED");
 

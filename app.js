@@ -11,6 +11,8 @@ RedisStore = require("connect-redis")(session);
 pbkdf2 = require("pbkdf2");
 passhelper = require('pbkdf2-helpers');
 crytpo = require("crypto");
+http = require("http").Server(app);
+io = require("socket.io")(http);
 
 let connection;
 
@@ -38,6 +40,25 @@ nunjucks.configure("views", {
   express: app,
   noCache: true
 });
+
+app.use("/socket-io", express.static("node_modules/socket.io-client/dist"));
+
+//chat app----------------
+io.on("connection", function(client) {
+  console.log("CONNECTED");
+
+
+  client.on("incoming", function(msg) {
+    io.emit("chat-msg", msg);
+  });
+
+
+  client.on("disconnect", function() {
+    console.log("EXITED");
+  });
+});
+//-------------------------
+
 
 app.use(function(request, response, next) {
   if (request.session.user) {

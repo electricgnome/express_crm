@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1"> {% block head %}
-  <title >{% block title %}{% endblock %} -Kappa Insurance </title>
+  <title>{% block title %}{% endblock %} -Kappa Insurance </title>
   <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="css/main.css">
   <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
@@ -19,12 +19,12 @@
     <div class="navbar-fixed">
       <nav>
         <div class="nav-wrapper">
-          <a href="/form" class="brand-logo truncate">Kappa Insurance</a>
+          <a href="#" class="brand-logo truncate">Kappa Insurance</a>
           <a href="#" data-target="slide-out" class="sidenav-trigger">
             <i class="material-icons">menu</i>
           </a>
           <ul class="right hide-on-med-and-down">
-           <li>
+            <li>
               <a href="/">Main</a>
             </li>
             <li>
@@ -34,10 +34,10 @@
               <a href="/customer">view customer</a>
             </li>
             <li>
-                <a href="/todos">Tasks</a>
-              </li>
+              <a href="/todos">Tasks</a>
+            </li>
             <li>
-              <div  class="input-field col s12">
+              <div class="input-field col s12">
                 <i class="material-icons prefix">search</i>
                 <input type="text" id="autocomplete-input">
                 <label for="autocomplete-input">Search</label>
@@ -67,7 +67,21 @@
 
 
   {% block footer %}
-
+  <div id="modal2" class="modal">
+    <div class="modal-content">
+      <h6>Chat box!</h6>
+      <pre id="chat-box"></pre>
+      <input id="message" onkeypress="send_message(event)">
+    </div>
+    <div class="modal-footer">
+        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
+      </div>
+  </div>
+  <div class="fixed-action-btn">
+    <a href="#modal2" class="btn-floating btn-large waves-effect waves-light red">
+      <i class="material-icons">chat</i>
+    </a>
+  </div>
   <footer class="page-footer hide-on-small-only">
 
 
@@ -78,7 +92,9 @@
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <!-- Optional JavaScript -->
-    <script src="js/main.js"></script> {% endblock %}
+    <script src="/socket-io/socket.io.js"></script>
+    <script src="js/main.js"></script>
+     {% endblock %}
     </div>
   </footer>
 

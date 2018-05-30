@@ -4,6 +4,28 @@ let vresult=[];
 let date1 = new Date();
 // date1.setDate(date1.getDate()+1);
 
+
+var server = io();
+server.on('connect', function (s) {
+    console.log('connected');
+});
+
+server.on('chat-msg', function (msg) {
+    var chat = document.getElementById("chat-box");
+    chat.insertAdjacentHTML('beforeend', '\n' + msg);
+});
+
+function send_message(event) {
+    var char = event.which || event.keyCode;
+    if (char == '13') {
+        var msg = document.getElementById("message");
+        server.emit('incoming', msg.value);
+        msg.value = '';
+    }
+}
+
+
+
 function materialize() {
     $('.modal').modal();
     $(".datepicker1").datepicker({
@@ -107,8 +129,7 @@ $(window).on("load", function () {
     
     materialize();
     
-  
-
+   
     $("#add_btn").on("click", function () {
 
         drivers += 1;
@@ -121,18 +142,18 @@ $(window).on("load", function () {
 <h5 class="center-align">Driver ${drivers} information</h5>
 <!-- <h6 class="center-align">Additional driver info</h6> -->
 <div class="row">
-    <div class="input field col s6 offset-m3 m3">
+    <div class="input-field col s6 offset-m3 m3">
         <input name="first_name${drivers}" id="first_name${drivers}" type="text" class="validate">
         <label for="first_name${drivers}">First Name</label>
     </div>
 
-    <div class="input field col s6  m3">
+    <div class="input-field col s6  m3">
         <input name="last_name${drivers}" id="last_name${drivers}" type="text" class="validate">
         <label for="last_name${drivers}">Last Name</label>
     </div>
 </div>
 <div class="row">
-    <div class="input field col s12 offset-m3 m6">
+    <div class="input-field col s12 offset-m3 m6">
         <input name="occupation${drivers}" id="occupation${drivers}" type="text">
         <label for="occupation${drivers}">Occupation</label>
     </div></div>
@@ -174,7 +195,7 @@ $(window).on("load", function () {
 <div class="divider"></div>
 <div class="row">
 
-    <div class="col s6 offset-m3 m3">
+    <div class="input-field col s6 offset-m3 m3">
         <label for="birthdate${drivers}" class>birthdate</label>
         <input name="birthdate${drivers}" id="birthdate${drivers}" type="text" class="datepicker">
 
@@ -195,9 +216,9 @@ $(window).on("load", function () {
 </div>
 
 <div class="row">
-    <div class=" input-field col s6 offset-m3 m3">
+    <div class="input-field col s6 offset-m3 m3">
         <select name="id_type${drivers}" id="id_type${drivers}">
-            <option value="Tx DL" selected>Texas Drivers License</option>
+            <option value="Tx DL" selected>Tx Drivers License</option>
             <option value="Tx ID">Texas ID</option>
             <option value="Out of state">Out of state</option>
             <option value="passport">Passport</option>
@@ -207,7 +228,7 @@ $(window).on("load", function () {
         </select>
         <label>Form of ID (Choose one):</label>
     </div>
-    <div class="input field col s6 m3">
+    <div class="input-field col s6 m3">
         <label for="id_number${drivers}">ID Number</label>
         <input name="id_number${drivers}" id="id_number${drivers}" type="text" class="validate counter" data-length="20">
 
@@ -218,7 +239,10 @@ $(window).on("load", function () {
 <h5 class="center-align">Accidents or Tickets?</h5>
 <h6 class="center-align">Please be honest. Your record will be verified. You may get a disclousre discount</h6>
 <br>
-<br> Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
+<br> 
+<div class="row">
+    <div class="col s12 offset-m3 m3">
+Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
 
 <label>
     <input class="with-gap" name="accident_tickets_flag${drivers}" acc="${drivers}" type="radio" value="1" />
@@ -229,10 +253,11 @@ $(window).on("load", function () {
     <input class="with-gap" name="accident_tickets_flag${drivers}" acc="${drivers}" type="radio" value="0" checked/>
     <span>No</span>
 </label>
-
+</div>
+</div>
 <div class="optional" id="accidents${drivers}">
-    <span class="level">
-        <div class="wrapper">
+<div class="row">
+<div class="col s6 offset-m3 m3">
             <span class="tooltip"></span>
             <br>
             <span class="c1">How many tickets have you had in the past 3 years?</span>
@@ -241,10 +266,9 @@ $(window).on("load", function () {
             </span>
 
         </div>
-    </span>
+    
 
-    <span class="level">
-        <div class="wrapper">
+        <div class="col s6 m3">
             <span class="tooltip"></span>
             <br>
             <span class="c1">How many accidents have you had in the past 3 years?</span>
@@ -265,7 +289,7 @@ $(window).on("load", function () {
             <br>
             <br>
         </div>
-    </span>
+    </div>
 
 </div>
     
@@ -307,24 +331,24 @@ $(window).on("load", function () {
                 <h5 class="center-align" class="fs-title">Vehicle ${cars}</h5>
                 <h6 class="center-align" class="fs-subtitle">What Vehicle are we insuring today?</h6>
                 <div class="row">
-                    <div class="input field col s3 offset-m3 m3">
+                    <div class="input-field col s7 offset-m3 m3">
                         <input type="text" id="VIN${cars}" name="VIN${cars}" placeholder="(VIN) Vehicle Identification Number"   class="counter" data-length="17" required />
-                        <!-- <label for="VIN${cars}">(VIN) Vehicle Identification Number</label> -->
+                       
                     </div>
-                    <div class="col s3 offset-m1 m3">
+                    <div class="col s3 m3">
                         <a class="btn waves-effect waves-light" name="verify_vin" id="verify_vin${cars}" value="${cars}" >verify VIN
                         </a>
                     </div>
                   
                 </div>
                 <div class="row">
-                    <div class="input field col s3 offset-m1 m3">
+                    <div class="input-field col s4 offset-m1 m3">
                         <input type="text" id="year${cars}" name="year${cars}" placeholder="year" />
                     </div>
-                    <div class="input field col s3 ">
+                    <div class="input-field col s4 m3 ">
                         <input type="text" id="brand${cars}" name="brand${cars}" placeholder="brand" />
                     </div>
-                    <div class="input field col s3 ">
+                    <div class="input-field col s4 m3 ">
                         <input type="text" id="model${cars}" name="model${cars}" placeholder="model" />
                     </div>
                 </div>
@@ -334,7 +358,7 @@ $(window).on("load", function () {
                     <h5 class="center-align">Coverage</h5>
                     <h6 class="center-align">How much coverage do you want?</h6>
                     <div class="row">
-                        <div class="input-field col s6 offset-m2 m4">
+                        <div class="input-field col s12 offset-m2 m6">
                             <select name="coverage${cars}" id="selects_field" value="${cars}">
 
                                 <option value="liability" selected>Liability Only</option>
