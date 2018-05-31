@@ -1,1 +1,38 @@
 {% extends "front_base.html" %} {% block title %}Contact Us{% endblock %} 
+
+{% block content %}
+<div style="height:100px ;"> </div>
+<div class="row" style="background-color:rgba(201, 185, 185, 0.76); width:60%">
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s6 offset-m3 m3">
+              <input  id="first_name" type="text" class="validate">
+              <label for="first_name">First Name</label>
+            </div>
+            <div class="input-field col s6 m3">
+              <input id="last_name" type="text" class="validate">
+              <label for="last_name">Last Name</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 offset-m3 m6">
+              <input  id="phone" type="number" class="validate">
+              <label for="phone">Phone</label>
+            </div>
+          </div>
+          <div class="row">
+            <div class="input-field col s12 offset-m3 m6">
+              <input id="email" type="email" class="validate">
+              <label for="email">Email</label>
+            </div>
+          </div>
+          <div class="row">
+                <div class="input-field col s12 offset-m3 m6">
+                  <textarea id="textarea1" class="materialize-textarea"></textarea>
+                  <label for="textarea1">Tell us something...</label>
+                </div>
+              </div>
+        </form>
+      </div>
+
+      {% endblock %}    
