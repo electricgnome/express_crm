@@ -16,53 +16,45 @@
 
 <body>
   <header id="header">{% block header %}
-    <div class="navbar-fixed">
-      <nav>
-        <div class="nav-wrapper">
-          <a href="#" class="brand-logo truncate">Kappa Insurance</a>
-          <a href="#" data-target="slide-out" class="sidenav-trigger">
-            <i class="material-icons">menu</i>
-          </a>
-          <ul class="right hide-on-med-and-down">
+        <div class="navbar-fixed">
+          <nav>
+            <div class="nav-wrapper">
+              <a href="#" class="brand-logo truncate">Kappa Insurance</a>
+              <a href="#" data-target="slide-out" class="sidenav-trigger">
+                <i class="material-icons">menu</i>
+              </a>
+              <ul class="right hide-on-med-and-down">
+                <li>
+                  <a href="/">Quote Request</a>
+                </li>
+                <li>
+                  <a href="/carriers">Our Carriers</a>
+                </li>
+                <li>
+                  <a href="/contact">Contact Us</a>
+                </li>
+                <li>
+                  <a href="/about">About Us</a>
+                </li>
+                
+              </ul>
+            </div>
+          </nav>
+    
+          <ul class="sidenav" id="slide-out">
             <li>
-              <a href="/">Main</a>
+              <a href="#">Home</a>
             </li>
             <li>
-              <a href="/quote">Quote Request</a>
+              <a href="#">Auto Quote Request</a>
             </li>
             <li>
-              <a href="/customer">view customer</a>
-            </li>
-            <li>
-              <a href="/todos">Tasks</a>
-            </li>
-            <li>
-              <div class="input-field col s12">
-                <i class="material-icons prefix">search</i>
-                <input type="text" id="autocomplete-input">
-                <label for="autocomplete-input">Search</label>
-              </div>
-            </li>
-            <li>
-              <a href="/logout">logout</a>
+              <a href="#">Contact Us</a>
             </li>
           </ul>
         </div>
-      </nav>
-
-      <ul class="sidenav" id="slide-out">
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Auto Quote Request</a>
-        </li>
-        <li>
-          <a href="#">Contact Us</a>
-        </li>
-      </ul>
-    </div>
-    {% endblock %}</header>
+        {% endblock %}
+    </header>
   <main id="content">{% block content %} {% endblock %}</main>
 
 

@@ -1,6 +1,6 @@
 let drivers = 1;
 let cars = 1;
-let vresult=[];
+let vresult = [];
 let date1 = new Date();
 // date1.setDate(date1.getDate()+1);
 
@@ -25,7 +25,6 @@ function send_message(event) {
 }
 
 
-
 function materialize() {
     $('.modal').modal();
     $(".datepicker1").datepicker({
@@ -42,6 +41,12 @@ function materialize() {
 
     $(".tooltipped").tooltip();
     $(".sidenav").sidenav();
+    $('.fixed-action-btn').floatingActionButton(
+         {
+            direction: 'left',
+            hoverEnabled: false
+          }
+    );
 
     $('input.counter').characterCounter();
 
@@ -55,7 +60,7 @@ function materialize() {
 
     $(`select[name=coverage${cars}]`).change(function () {
         var active_car = this.getAttribute("value")
-        console.log("car: "+ active_car)
+        console.log("car: " + active_car)
         if ($(`select[name=coverage${active_car}][id=selects_field]`).val() == "liability") {
             jQuery(`#full_cover${active_car}`).hide();
         } else {
@@ -65,75 +70,73 @@ function materialize() {
 
     $(`input[type=radio][name=accident_tickets_flag${drivers}]`).click(function () {
         var active_driver = this.getAttribute("acc")
-        console.log("active driver: "+ active_driver)
+        console.log("active driver: " + active_driver)
         if ($(`input[type=radio][name=accident_tickets_flag${active_driver}]:checked`).val() == "0") {
             jQuery(`#accidents${active_driver}`).hide();
         } else {
             jQuery(`#accidents${active_driver}`).show();
         }
-        
+
     });
 
     $(`#verify_vin${cars}`).off().on("click", function () {
-      var active_car = this.getAttribute("value")
+        var active_car = this.getAttribute("value")
 
         verify_vin(document.getElementById(`VIN${active_car}`).value, active_car);
-        
+
     });
-       
+
 
 }
 
 // 1N4AL3AP6DN452526
-function verify_vin(vin, active_car){
-  
-  
-    
-    console.log("verify vin: "+ active_car)
-    vresult; 
+function verify_vin(vin, active_car) {
+
+
+
+    console.log("verify vin: " + active_car)
+    vresult;
     $.ajax({
         url: "https://vpic.nhtsa.dot.gov/api/vehicles/DecodeVINValuesBatch/",
         type: "POST",
-        data: { format: "json", data: vin},
+        data: { format: "json", data: vin },
         dataType: "json",
-        success: function(result)
-        {
-            
+        success: function (result) {
+
             vresult = result;
-            if (vresult.Message == "No data found" || vresult.Results[0].ErrorCode.indexOf("0") != 0 ){
+            if (vresult.Message == "No data found" || vresult.Results[0].ErrorCode.indexOf("0") != 0) {
                 // alert(vresult.Results[0].ErrorCode)
                 console.log(vresult.Results[0].ErrorCode)
                 $("#error_msg").html(`${vresult.Results[0].ErrorCode}`);
                 $("#modal1").modal('open')
                 return 0;
-            }else{
-          console.log(result);
-          $(`#brand${active_car}`).val($(`#brand${active_car}`).val() + vresult.Results[0].Make);
-          $(`#year${active_car}`).val($(`#year${active_car}`).val() + vresult.Results[0].ModelYear);
-          $(`#model${active_car}`).val($(`#model${active_car}`).val() + vresult.Results[0].Model);
+            } else {
+                console.log(result);
+                $(`#brand${active_car}`).val($(`#brand${active_car}`).val() + vresult.Results[0].Make);
+                $(`#year${active_car}`).val($(`#year${active_car}`).val() + vresult.Results[0].ModelYear);
+                $(`#model${active_car}`).val($(`#model${active_car}`).val() + vresult.Results[0].Model);
             }
 
         },
-        error: function(xhr, ajaxOptions, thrownError)
-        {
+        error: function (xhr, ajaxOptions, thrownError) {
             console.log(xhr.status);
             console.log(thrownError);
         }
     });
 
-    
+
 }
 
 
 $(window).on("load", function () {
-    
+
     materialize();
-    
-   
+
+
     $("#add_btn").on("click", function () {
 
         drivers += 1;
-        
+
         $(
             `<li class="tab"><a href="#driver${drivers}"> driver ${drivers}</a> </li>`
         ).insertBefore("#add_li");
@@ -296,26 +299,18 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
     </div>`).insertBefore("#add_div");
 
 
-    // $(`input[type=radio][name=accident_tickets_flag${drivers}]`).click(function () {
-    //     if ($(`input[type=radio][name=accident_tickets_flag${drivers}]:checked`).val() == "0") {
-    //         jQuery(`#accidents${drivers}`).hide();
-    //     } else {
-    //         jQuery(`#accidents${drivers}`).show();
-    //     }
-    // });
-
-   
+      
         materialize();
-       
-        
+
+
         setTimeout(function () {
-          $("#driver_tabs li.tab a")[`${drivers - 1}`].click()
-          $(`#driver${drivers-1}`).css('display', 'none')
-          $(`#driver${drivers-1}`).removeClass('active')
-        //   $(`#driver${drivers}`).addClass('active')
+            $("#driver_tabs li.tab a")[`${drivers - 1}`].click()
+            $(`#driver${drivers - 1}`).css('display', 'none')
+            $(`#driver${drivers - 1}`).removeClass('active')
+            
         }, 100);
 
-       
+
 
     });
 
@@ -424,27 +419,21 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
 
     </div>`).insertBefore("#add_car");
 
-    // $(`select[name=coverage${cars}]`).change(function () {
-    //     if ($(`select[name=coverage${cars}][id=selects_field]`).val() == "liability") {
-    //         jQuery(`#full_cover${cars}`).hide();
-    //     } else {
-    //         jQuery(`#full_cover${cars}`).show();
-    //     }
-    // });
 
         materialize();
         setTimeout(function () {
-          $("#cars_tabs li.tab a")[`${cars - 1}`].click()
-          $(`#vehicle${cars-1}`).css('display', 'none')
-          $(`#vehicle${cars-1}`).removeClass('active')
-        //   $(`#vehicle${cars}`).addClass('active')
+            $("#cars_tabs li.tab a")[`${cars - 1}`].click()
+            $(`#vehicle${cars - 1}`).css('display', 'none')
+            $(`#vehicle${cars - 1}`).removeClass('active')
+           
         }, 100);
 
     });
 
+   
 
 
-    
+
 });
 
 

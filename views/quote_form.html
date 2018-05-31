@@ -1,5 +1,8 @@
-{% extends "base.html" %} {% block title %}Quote Request{% endblock %} {% block content %}
+{% extends "front_base.html" %} {% block title %}Quote Request{% endblock %} 
+
+{% block content %}
 <!-- multistep form -->
+
 <div class="container z-depth-5" style="margin-top:20px;">
 
     <form class="col s6" action="success" method="POST" id="form">
@@ -15,14 +18,10 @@
                     <li class="tab">
                         <a href="#discounts">Discounts</a>
                     </li>
-                    <!-- <li class="tab">
-                        <a href="#lienholder">Lien Holder</a>
-                    </li> -->
+                  
                 </ul>
             </div>
-            <!-- <div class="card-content">
-                Some stuff here
-            </div> -->
+          
             <div class="card-content grey lighten-4 padding-0">
 
                 {% include "default_tabs.html" %} 

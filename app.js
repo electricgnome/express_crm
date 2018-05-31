@@ -43,27 +43,6 @@ nunjucks.configure("views", {
   noCache: true
 });
 
-app.use("/socket-io", express.static("node_modules/socket.io-client/dist"));
-
-//chat app----------------
-io.on("connection", function(client) {
-  console.log("CONNECTED");
-
-
-  client.on("incoming", function(msg) {
-    io.emit("chat-msg", msg);
-  });
-
-
-  client.on("disconnect", function() {
-    console.log("EXITED");
-  });
-});
-//-------------------------
-
-app.get("/chat", function(request, response) {
-  response.render("chat.html");
-});
 
 app.use(function(request, response, next) {
   if (request.session.user) {
@@ -76,6 +55,10 @@ app.use(function(request, response, next) {
     response.redirect("/login");
   }
 });
+
+
+
+
 
 app.get("/register", function(request, response) {
   response.render("register.html");
@@ -139,8 +122,8 @@ app.get("/", function(request, response) {
   response.render("index.html");
 });
 
-app.get("/form", function (request, response) {
-  response.render("form.html");
+app.get("/quote", function (request, response) {
+  response.render("quote_form.html");
 });
 
 app.get("/customer", function (request, response) {
@@ -229,6 +212,28 @@ app.get("/canvas", function(request, response) {
   response.render("canvas.html");
 });
 
-app.listen(8800, function() {
+app.use("/socket-io", express.static("node_modules/socket.io-client/dist"));
+
+//chat app----------------
+io.on("connection", function(client) {
+  console.log("CONNECTED");
+
+
+  client.on("incoming", function(msg) {
+    io.emit("chat-msg", msg);
+  });
+
+
+  client.on("disconnect", function() {
+    console.log("EXITED");
+  });
+});
+//-------------------------
+
+app.get("/chat", function(request, response) {
+  response.render("chat.html");
+});
+
+http.listen(8800, function() {
   console.log("Listening on port 8800");
 });
