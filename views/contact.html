@@ -1,38 +1,73 @@
-{% extends "front_base.html" %} {% block title %}Contact Us{% endblock %} 
+{% extends "front_base.html" %} {% block title %}Contact Us{% endblock %} {% block content %}
 
-{% block content %}
-<div style="height:100px ;"> </div>
-<div class="row" style="background-color:rgba(201, 185, 185, 0.76); width:60%">
-        <form class="col s12">
-          <div class="row">
-            <div class="input-field col s6 offset-m3 m3">
-              <input  id="first_name" type="text" class="validate">
-              <label for="first_name">First Name</label>
-            </div>
-            <div class="input-field col s6 m3">
-              <input id="last_name" type="text" class="validate">
-              <label for="last_name">Last Name</label>
-            </div>
+<!-- <div style="height:100px ;"> </div> -->
+<div class="row">
+  <form class="col s12 offset-m3 m7 ">
+    <div class="card center-align">
+      <div class="card-image ">
+        <div class="mapouter ">
+          <div class="gmap_canvas">
+            <iframe width="100%" height="500" id="gmap_canvas" src="https://maps.google.com/maps?q=kappa insurance, houston, tx&t=&z=13&ie=UTF8&iwloc=&output=embed"
+              frameborder="0" scrolling="no" marginheight="0" marginwidth="0"></iframe>
+            <a href="https://www.kappainsure.me"></a>
           </div>
-          <div class="row">
-            <div class="input-field col s12 offset-m3 m6">
-              <input  id="phone" type="number" class="validate">
-              <label for="phone">Phone</label>
-            </div>
-          </div>
-          <div class="row">
-            <div class="input-field col s12 offset-m3 m6">
-              <input id="email" type="email" class="validate">
-              <label for="email">Email</label>
-            </div>
-          </div>
-          <div class="row">
-                <div class="input-field col s12 offset-m3 m6">
-                  <textarea id="textarea1" class="materialize-textarea"></textarea>
-                  <label for="textarea1">Tell us something...</label>
-                </div>
-              </div>
-        </form>
+          <style>
+            .mapouter {
+              text-align: right;
+              height: 500px;
+              width: 100%;
+            }
+
+            .gmap_canvas {
+              overflow: hidden;
+              background: none!important;
+              height: 500px;
+              width: 100%;
+              min-width: 50%;
+            }
+          </style>
+        </div>
       </div>
+      <div class="card-content">
+        address: 2616 South Loop W. Ste. 536<br>
+                 Houston, Tx. 77054<br>
+        Phone: +1(713)518-1438<br>
+        Fax: +1(832)318-0609<br>
+        Office hours: (M-F) 9:00AM - 5:00PM<br>
+                      (S-S) CLOSED
+        
+      </div>
+      <div class="row">
+        <div class="input-field col s6 offset-m3 m3">
+          <input id="first_name" type="text" class="validate">
+          <label for="first_name">First Name</label>
+        </div>
+        <div class="input-field col s6 m3">
+          <input id="last_name" type="text" class="validate">
+          <label for="last_name">Last Name</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 offset-m3 m6">
+          <input id="phone" type="number" class="validate">
+          <label for="phone">Phone</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 offset-m3 m6">
+          <input id="email" type="email" class="validate">
+          <label for="email">Email</label>
+        </div>
+      </div>
+      <div class="row">
+        <div class="input-field col s12 offset-m3 m6">
+          <textarea id="textarea1" class="materialize-textarea"></textarea>
+          <label for="textarea1">Tell us something...</label>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
 
-      {% endblock %}    
+
+{% endblock %}

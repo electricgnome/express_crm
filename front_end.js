@@ -59,7 +59,7 @@ app.get("/carriers", function(request, response) {
 
 app.post("/success", function (request, response, next) {
   var data = request.body
-  response.render("success2.html", {data});
+  response.render("success.html", {data});
 });
 
 

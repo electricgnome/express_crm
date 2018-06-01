@@ -131,7 +131,7 @@ function verify_vin(vin, active_car) {
 $(window).on("load", function () {
 
     materialize();
-
+    $('.collapsible').collapsible();
 
     $("#add_btn").on("click", function () {
 
