@@ -1,6 +1,6 @@
 // converted to use sequelize instead of pgp
 const express = require("express");
-nunjucks = require("nunjucks");
+const setup = require('./setup');
 body_parser = require("body-parser");
 jsonfile = "/src/file.json";
 const Promise = require("bluebird");
@@ -9,6 +9,8 @@ redis = require("redis"),
 // client = redis.createClient();
 RedisStore = require("connect-redis")(session);
 
+var ses = require('./ses')
+// ses.send_mail({});
 
 
 let connection;
@@ -35,11 +37,7 @@ app.use(
   })
 );
 
-nunjucks.configure("views", {
-  autoescape: true,
-  express: app,
-  noCache: true
-});
+setup.set_app(app);
 
 app.get("/", function(request, response) {
   response.render("quote_form.html");
