@@ -11,6 +11,7 @@ var ses = new SES({
 });
 
 function send_mail (form_data) {
+  console.log(form_data)
   var params = {
     Destination: {
       // BccAddresses: [
