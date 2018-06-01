@@ -6,7 +6,7 @@ jsonfile = "/src/file.json";
 const Promise = require("bluebird");
 session = require("express-session");
 redis = require("redis"),
-client = redis.createClient();
+// client = redis.createClient();
 RedisStore = require("connect-redis")(session);
 
 
