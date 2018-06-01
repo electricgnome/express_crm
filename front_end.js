@@ -57,6 +57,7 @@ app.get("/carriers", function(request, response) {
 
 app.post("/success", function (request, response, next) {
   var data = request.body
+  ses.send_mail({data});
   response.render("success.html", {data});
 });
 

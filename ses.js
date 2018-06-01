@@ -29,16 +29,16 @@ function send_mail (form_data) {
     Message: {
       Body: {
         Html: {
-          Data: setup.nunjucks.render('email.html', {}),
+          Data: setup.nunjucks.render('email.html', {form_data}),
           Charset: 'utf-8'
         },
         Text: {
-          Data: setup.nunjucks.render('email.txt', {}),
+          Data: setup.nunjucks.render('email.txt', {form_data}),
           Charset: 'utf-8'
         }
       },
       Subject: {
-        Data: 'New Quote Request for: {% data.name %}',
+        Data: 'New Quote Request for: { form_data.first_name1}',
         Charset: 'utf-8'
       }
     },
