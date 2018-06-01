@@ -82,7 +82,7 @@ io.on("connection", function(client) {
 //-------------------------
 
 var PORT = process.env.PORT || 8800;
-app.listen(PORT, function () {
+http.listen(PORT, function () {
   console.log('Listening on port ' + PORT);
 });
 
