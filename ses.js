@@ -11,7 +11,7 @@ var ses = new SES({
 });
 
 function send_mail (form_data) {
-  console.log(form_data)
+  console.log(form_data.form_data.first_name1)
   var params = {
     Destination: {
       // BccAddresses: [
@@ -39,7 +39,7 @@ function send_mail (form_data) {
         }
       },
       Subject: {
-        Data: `New Quote Request for: ${form_data.first_name1}`,
+    Data: `New Quote Request for: ${form_data.form_data.first_name1}`,
         Charset: 'utf-8'
       }
     },

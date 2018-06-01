@@ -1,6 +1,6 @@
 
 <table>
-{% for key, value in form_data %}
+{% for key, value in form_data.form_data %}
 <tr>
 
 <td>{{key}}</td>
@@ -11,6 +11,6 @@
 {# <tr>
 <td>{{ form_data.first_name1 }}</td>
 <td>{{ form_data.last_name1 }}</td>
-</tr> #}
+</tr> 
 </table>
-{{form_data | dump}}
+{{form_data | dump}}#}
