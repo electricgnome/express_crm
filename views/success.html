@@ -1,18 +1,18 @@
-{% extends "base.html" %} {% block title %}Quote Request submitted successfully!!{% endblock %} {% block content %}
-<div>
-    Thanks for submitting your quote request. We will give you a call shortly!!
-</div> 
-<table>
-{% for key, value in data %}
-<tr>
+{% extends "front_base.html" %} {% block title %}Quote Request submitted successfully!!{% endblock %} {% block content %}
 
-<td>{{key}}</td>
-<td>{{value}}</td>
-</tr>
-{% endfor %}
-<tr>
-<td>{{ data.first_name1 }}</td>
-<td>{{ data.last_name1 }}</td>
-</tr>
-</table>
+<div class="container z-depth-5" style="margin-top:20px;">
+    <div class="col s12 m6 ">
+        <div class="card blue-grey center-align hoverable white-text">
+                <br><br><br>
+            <h4>Thanks for submitting a quote request, {{ data.first_name1 }}!</h4>
+
+            <p class="flow-text">Our team is working on your quote ASAP! Once we have your personalized quote ready, we'll give you a call!</p>
+            <div>
+                    <br><br><br><br><br><br>
+            </div>
+        </div>
+    </div>
+</div>
+
+
 {% endblock %}
