@@ -56,9 +56,9 @@ app.get("/carriers", function(request, response) {
   });
 
 app.post("/success", function (request, response, next) {
-  var data = request.body
-  ses.send_mail({data});
-  response.render("success.html", {data});
+  var form_data = request.body
+  ses.send_mail({form_data});
+  response.render("success.html", {form_data});
   // response.render("email.html", {data});
   
 });
