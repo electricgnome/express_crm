@@ -10,8 +10,7 @@ var ses = new SES({
   region: "us-west-2",
 });
 
-function send_mail (form_data) {
-  console.log(form_data)
+function send_mail (data) {
   var params = {
     Destination: {
       // BccAddresses: [
@@ -30,16 +29,16 @@ function send_mail (form_data) {
     Message: {
       Body: {
         Html: {
-          Data: setup.nunjucks.render('email.html', {form_data}),
+          Data: setup.nunjucks.render('email.html', {data}),
           Charset: 'utf-8'
         },
         Text: {
-          Data: setup.nunjucks.render('email.txt', {form_data}),
+          Data: setup.nunjucks.render('email.txt', {data}),
           Charset: 'utf-8'
         }
       },
       Subject: {
-        Data: `New Quote Request for: {{form_data.first_name1}}`,
+        Data: `New Quote Request for: ${data.first_name1}`,
         Charset: 'utf-8'
       }
     },
