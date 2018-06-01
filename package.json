@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/electricgnome/express#readme",
   "dependencies": {
-    "aws-sdk": "^2.249.1",
+    "aws-sdk": "^2.250.1",
     "bluebird": "^3.5.1",
     "connect-redis": "^3.3.3",
     "connect-session-sequelize": "^5.2.1",
