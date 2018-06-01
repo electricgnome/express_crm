@@ -23,8 +23,8 @@ function send_mail (form_data) {
       //   /* more items */
       // ],
       ToAddresses: [
-        // 'service@kappainsure.com',
-        'hector@kappainsure.com'
+        'service@kappainsure.com'
+        // 'hector@kappainsure.com'
       ]
     },
     Message: {
