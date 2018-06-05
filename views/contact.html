@@ -2,7 +2,7 @@
 
 <!-- <div style="height:100px ;"> </div> -->
 <div class="row">
-  <form class="col s12 offset-m3 m7 ">
+  <form class="col s12 offset-m3 m7" action="contact" method="POST">
     <div class="card center-align">
       <div class="card-image ">
         <div class="mapouter ">
@@ -39,36 +39,36 @@
       </div>
       <div class="row">
         <div class="input-field col offset-s1 s5 offset-m3 m3">
-          <input id="first_name" type="text" class="validate">
-          <label for="first_name">First Name</label>
+          <input id="first_name1" name="first_name1" type="text" class="validate">
+          <label for="first_name1">First Name</label>
         </div>
         <div class="input-field col s5 m3">
-          <input id="last_name" type="text" class="validate">
+          <input id="last_name" name="last_name" type="text" class="validate">
           <label for="last_name">Last Name</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col offset-s1 s10 offset-m3 m6">
-          <input id="phone" type="number" class="validate">
+          <input id="phone" name="phone" type="number" class="validate">
           <label for="phone">Phone</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col  offset-s1 s10 offset-m3 m6">
-          <input id="email" type="email" class="validate">
+          <input id="email" name="email" type="email" class="validate">
           <label for="email">Email</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col  offset-s1 s10 offset-m3 m6">
-          <textarea id="textarea1" class="materialize-textarea"></textarea>
-          <label for="textarea1">Tell us something...</label>
+          <textarea id="textarea" name="textarea" class="materialize-textarea"></textarea>
+          <label for="textarea">What's on your mind...</label>
         </div>
       </div>
       <div class="row">
         <div class="input-field col offset-s1 s10 offset-m2 m4 ">
             <div id="buttons">
-  
+                <input id="subject" name="subject" type="hidden" value="New message from: ">
                 <button class="btn waves-effect waves-light" type="submit" name="action">Submit
   
                 </button>

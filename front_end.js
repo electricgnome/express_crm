@@ -55,6 +55,12 @@ app.get("/carriers", function(request, response) {
     response.render("contact.html");
   });
 
+  app.post("/contact", function(request, response) {
+    var form_data = request.body
+    ses.send_mail({form_data});
+    response.redirect("/");
+  });
+
 app.post("/success", function (request, response, next) {
   var form_data = request.body
   ses.send_mail({form_data});

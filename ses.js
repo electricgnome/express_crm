@@ -23,7 +23,7 @@ function send_mail (form_data) {
       //   /* more items */
       // ],
       ToAddresses: [
-        'team@kappainsure.com'
+        'team@kappainsure.com',
         // 'hector@kappainsure.com'
       ]
     },
@@ -39,7 +39,7 @@ function send_mail (form_data) {
         }
       },
       Subject: {
-    Data: `New Quote Request for: ${form_data.form_data.first_name1}`,
+    Data: `${form_data.form_data.subject} ${form_data.form_data.first_name1}`,
         Charset: 'utf-8'
       }
     },
