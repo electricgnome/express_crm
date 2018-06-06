@@ -2,12 +2,15 @@ let drivers = 1;
 let cars = 1;
 let vresult = [];
 let date1 = new Date();
+var user='';
 // date1.setDate(date1.getDate()+1);
 
 
-var server = io();
+var server = io('/kappa');
+
 server.on('connect', function (s) {
-    console.log('connected');
+    console.dir('connected: '+ server.id);
+    user=server.id
 });
 
 server.on('chat-msg', function (msg) {
@@ -130,6 +133,7 @@ function verify_vin(vin, active_car) {
 
 $(window).on("load", function () {
 
+    
     materialize();
     $('.collapsible').collapsible();
 

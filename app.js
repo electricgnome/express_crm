@@ -101,8 +101,9 @@ app.post("/login", function(request, response) {
   db.user.findOne({where:{email:username}}).then( user =>{    
     if (username == user.email && passhelper.matches(password, user.passcrypt)) {
       request.session.user = username;
-      console.log("Welcome!");
-      response.redirect("/");
+      console.log("Welcome!"+ request.session.user);
+      usern=request.session.user;
+      response.redirect("/", user);
     } else {
       console.log("failed!");
       response.redirect("/login");
@@ -212,15 +213,20 @@ app.get("/canvas", function(request, response) {
   response.render("canvas.html");
 });
 
+//chat app----------------
+
 app.use("/socket-io", express.static("node_modules/socket.io-client/dist"));
 
-//chat app----------------
-io.on("connection", function(client) {
-  console.log("CONNECTED");
+var nsp = io.of('/kappa');
 
+nsp.on("connection", function(client) {
+  console.log("CONNECTED");
+  nsp.clients((error, clients)=>{
+    console.log(clients);
+  })
 
   client.on("incoming", function(msg) {
-    io.emit("chat-msg", msg);
+    nsp.emit("chat-msg", msg);
   });
 
 

@@ -67,15 +67,30 @@
 
 
   {% block footer %}
+
   <div id="modal2" class="modal">
     <div class="modal-content">
-      <h6>Chat box!</h6>
-      <pre id="chat-box"></pre>
-      <input id="message" onkeypress="send_message(event)">
+      <div class="row">
+        <div class="col s9">
+          <h6>Chat box!</h6>
+          <pre id="chat-box"></pre>
+          <input id="message" onkeypress="send_message(event)">
+        </div>
+        <div class="col s3">
+          <ul>Channels:
+            
+          </ul>
+          <div class="divider"></div>
+          <ul>Users:
+            
+
+          </ul>
+        </div>
+      </div>
     </div>
     <div class="modal-footer">
-        <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
-      </div>
+      <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
+    </div>
   </div>
 
   <div class="fixed-action-btn">
@@ -83,6 +98,7 @@
       <i class="material-icons">chat</i>
     </a>
   </div>
+
   <footer class="page-footer hide-on-small-only">
 
 
@@ -94,8 +110,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <!-- Optional JavaScript -->
     <script src="/socket-io/socket.io.js"></script>
-    <script src="js/main.js"></script>
-     {% endblock %}
+    <script src="js/main.js"></script> {% endblock %}
     </div>
   </footer>
 
