@@ -22,6 +22,8 @@ var app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
 
+
+
 app.use(body_parser.urlencoded({ extended: true }));
 app.use(express.static("public"));
 
@@ -36,6 +38,15 @@ app.use(
     cookie: { maxAge: 24 * hour }
   })
 );
+const sharedsession = require("express-socket.io-session");
+
+io.use(sharedsession(session({
+  store: new RedisStore(),
+  secret: process.env.SECRET_KEY || "dev",
+  resave: true,
+  saveUninitialized: false,
+  cookie: { maxAge: 24 * hour }
+})));
 
 nunjucks.configure("views", {
   autoescape: true,
@@ -102,7 +113,7 @@ app.post("/login", function(request, response) {
     if (username == user.email && passhelper.matches(password, user.passcrypt)) {
       request.session.user = username;
       console.log("Welcome!");
-      response.redirect("/");
+      response.render("index.html", {username});
     } else {
       console.log("failed!");
       response.redirect("/login");
@@ -212,23 +223,40 @@ app.get("/canvas", function(request, response) {
   response.render("canvas.html");
 });
 
+//===========chat app----------------
+
 app.use("/socket-io", express.static("node_modules/socket.io-client/dist"));
 
-//chat app----------------
+var users=[];
 io.on("connection", function(client) {
-  console.log("CONNECTED");
+  // console.log(client.id + " CONNECTED");
+  // client.emit("message", "Welcome!")
+  // client.users=[];  
+  // io.emit("users", client.users)
+
+  client.on('user', function(user){
+    client.username=user;
+    console.log("user: " + client.username)
+    if (!users.includes(user)){
+      users.push(user)
+    }
+    
+    io.emit("users", users)
+    console.log("list of users: " + users)
+  })
 
 
-  client.on("incoming", function(msg) {
-    io.emit("chat-msg", msg);
+  client.on("incoming", function(msg, user) {
+    io.emit("chat-msg", user, msg);
   });
 
+  
 
   client.on("disconnect", function() {
     console.log("EXITED");
   });
 });
-//-------------------------
+//===============-------------------------
 
 app.get("/chat", function(request, response) {
   response.render("chat.html");
