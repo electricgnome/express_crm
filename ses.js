@@ -11,6 +11,7 @@ var ses = new SES({
 });
 
 function send_mail (form_data) {
+  console.log(form_data.form_data.first_name1)
   var params = {
     Destination: {
       // BccAddresses: [
@@ -22,23 +23,23 @@ function send_mail (form_data) {
       //   /* more items */
       // ],
       ToAddresses: [
-        // 'service@kappainsure.com',
-        'hector@kappainsure.com'
+        'team@kappainsure.com',
+        // 'hector@kappainsure.com'
       ]
     },
     Message: {
       Body: {
         Html: {
-          Data: setup.nunjucks.render('email.html', {}),
+          Data: setup.nunjucks.render('email.html', {form_data}),
           Charset: 'utf-8'
         },
         Text: {
-          Data: setup.nunjucks.render('email.txt', {}),
+          Data: setup.nunjucks.render('email.txt', {form_data}),
           Charset: 'utf-8'
         }
       },
       Subject: {
-        Data: 'New Quote Request for: {% data.name %}',
+    Data: `${form_data.form_data.subject} ${form_data.form_data.first_name1}`,
         Charset: 'utf-8'
       }
     },

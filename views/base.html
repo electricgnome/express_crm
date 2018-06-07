@@ -28,7 +28,7 @@
               <a href="/">Main</a>
             </li>
             <li>
-              <a href="/quote">Quote Request</a>
+              <a href="#">Quote Request</a>
             </li>
             <li>
               <a href="/customer">view customer</a>
@@ -50,18 +50,25 @@
         </div>
       </nav>
 
-      <ul class="sidenav" id="slide-out">
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Auto Quote Request</a>
-        </li>
-        <li>
-          <a href="#">Contact Us</a>
-        </li>
-      </ul>
+
     </div>
+    <ul class="sidenav" id="slide-out">
+      <li>
+        <a href="/">Main</a>
+      </li>
+      <li>
+        <a href="#">Quote Request</a>
+      </li>
+      <li>
+        <a href="/customer">view customer</a>
+      </li>
+      <li>
+        <a href="/todos">Tasks</a>
+      </li>
+      <li>
+        <a href="/logout">logout</a>
+      </li>
+    </ul>
     {% endblock %}</header>
   <main id="content">{% block content %} {% endblock %}</main>
 
@@ -71,23 +78,24 @@
   <div id="modal2" class="modal">
     <div class="modal-content">
       <div class="row">
-        <div class="col s9">
-          <h6>Chat box!</h6>
+        <div class="col s8">
+          <h6 id="user" name="user" value="{{username}}">Chat</h6>
           <pre id="chat-box"></pre>
           <input id="message" onkeypress="send_message(event)">
         </div>
-        <div class="col s3">
+
+        <div class="col offset-s1 s3">
           <ul>Channels:
-            
+            <li></li>
           </ul>
           <div class="divider"></div>
-          <ul>Users:
-            
-
+          <ul id="user_list">Users:
+            <li></li>
           </ul>
         </div>
       </div>
     </div>
+
     <div class="modal-footer">
       <a href="#!" class="modal-close waves-effect waves-green btn-flat">Exit</a>
     </div>
