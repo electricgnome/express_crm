@@ -252,8 +252,9 @@ io.on("connection", function(client) {
 
   
 
-  client.on("disconnect", function() {
-    console.log("EXITED");
+  client.on("disconnect", function(user) {
+    client.emit("message", client.username + " has left the room.")
+    console.log(client.username + " EXITED");
   });
 });
 //===============-------------------------

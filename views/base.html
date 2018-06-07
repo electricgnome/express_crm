@@ -28,7 +28,7 @@
               <a href="/">Main</a>
             </li>
             <li>
-              <a href="/quote">Quote Request</a>
+              <a href="#">Quote Request</a>
             </li>
             <li>
               <a href="/customer">view customer</a>
@@ -50,18 +50,25 @@
         </div>
       </nav>
 
-      <ul class="sidenav" id="slide-out">
-        <li>
-          <a href="#">Home</a>
-        </li>
-        <li>
-          <a href="#">Auto Quote Request</a>
-        </li>
-        <li>
-          <a href="#">Contact Us</a>
-        </li>
-      </ul>
+
     </div>
+    <ul class="sidenav" id="slide-out">
+      <li>
+        <a href="/">Main</a>
+      </li>
+      <li>
+        <a href="#">Quote Request</a>
+      </li>
+      <li>
+        <a href="/customer">view customer</a>
+      </li>
+      <li>
+        <a href="/todos">Tasks</a>
+      </li>
+      <li>
+        <a href="/logout">logout</a>
+      </li>
+    </ul>
     {% endblock %}</header>
   <main id="content">{% block content %} {% endblock %}</main>
 
@@ -76,7 +83,7 @@
           <pre id="chat-box"></pre>
           <input id="message" onkeypress="send_message(event)">
         </div>
-        
+
         <div class="col offset-s1 s3">
           <ul>Channels:
             <li></li>
@@ -110,9 +117,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
     <!-- Optional JavaScript -->
     <script src="/socket-io/socket.io.js"></script>
-    <script src="js/main.js"></script>   
-    
-    {% endblock %}
+    <script src="js/main.js"></script> {% endblock %}
     </div>
   </footer>
 

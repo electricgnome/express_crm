@@ -8,7 +8,7 @@ if (v_user !== "") {
   localStorage.setItem("user", v_user);
 }
 user = localStorage.getItem("user");
-var user_li=[];
+var user_li = [];
 // date1.setDate(date1.getDate()+1);
 
 // =====chat app ==========
@@ -17,21 +17,23 @@ server.on("connect", function(socket) {
   console.log(user + " connected");
 });
 server.emit("user", user);
-// server.on('message', function(message){
-//     alert("Server says: " + message)
-// })
+
+server.on("message", function(message) {
+  var chat = document.getElementById("chat-box");
+  chat.insertAdjacentHTML("beforeend", "\n" + message);
+  alert("Server says: " + message);
+});
 
 server.on("users", function(users) {
   users.forEach(element => {
-      
-      console.log(user_li)
+    console.log(user_li);
 
     if (!user_li.includes(element)) {
       var node = document.createElement("LI");
       var textnode = document.createTextNode(element);
       node.appendChild(textnode);
       document.getElementById("user_list").appendChild(node);
-      user_li.push(element)
+      user_li.push(element);
     }
   });
 });
