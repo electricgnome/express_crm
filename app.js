@@ -10,7 +10,7 @@ client = redis.createClient();
 RedisStore = require("connect-redis")(session);
 pbkdf2 = require("pbkdf2");
 passhelper = require('pbkdf2-helpers');
-crytpo = require("crypto");
+crypto = require("crypto");
 
 
 let connection;
@@ -80,7 +80,7 @@ app.post("/register", function(request, response) {
   var password = request.body.password;
   var password2 = request.body.password2;
   var passcrypt = passhelper.generate_storage(password);
-  
+
 
   if (passhelper.matches(password2, passcrypt)){
     console.log("Matching passwords!!")
@@ -93,12 +93,12 @@ app.post("/register", function(request, response) {
       response.redirect("/login");
     })
     //pass info to db.
-    
+
   }else{
     console.log("mismatch!!");
     response.redirect("/register");
   }
-  
+
 });
 
 
@@ -109,7 +109,7 @@ app.get("/login", function(request, response) {
 app.post("/login", function(request, response) {
   var username = request.body.username;
   var password = request.body.password;
-  db.user.findOne({where:{email:username}}).then( user =>{    
+  db.user.findOne({where:{email:username}}).then( user =>{
     if (username == user.email && passhelper.matches(password, user.passcrypt)) {
       request.session.user = username;
       console.log("Welcome!");
@@ -119,7 +119,7 @@ app.post("/login", function(request, response) {
       response.redirect("/login");
     }
   });
-  
+
 });
 
 app.get("/logout", function(request, response) {
@@ -152,7 +152,7 @@ app.post("/success", function (request, response, next) {
 
 app.get("/todos", function(request, response) {
   db.task.findAll({ include: [{ model: db.user }] }).then(tasks => {
-    db.user.findAll({ offset: 1 }).then(users=>{ 
+    db.user.findAll({ offset: 1 }).then(users=>{
       console.log(users.firstName)
       response.render("todos.html", { tasks, users });
     });
@@ -231,7 +231,7 @@ var users=[];
 io.on("connection", function(client) {
   // console.log(client.id + " CONNECTED");
   // client.emit("message", "Welcome!")
-  // client.users=[];  
+  // client.users=[];
   // io.emit("users", client.users)
 
   client.on('user', function(user){
@@ -240,7 +240,7 @@ io.on("connection", function(client) {
     if (!users.includes(user)){
       users.push(user)
     }
-    
+
     io.emit("users", users)
     console.log("list of users: " + users)
   })
@@ -250,7 +250,7 @@ io.on("connection", function(client) {
     io.emit("chat-msg", user, msg);
   });
 
-  
+
 
   client.on("disconnect", function(user) {
     client.emit("message", client.username + " has left the room.")

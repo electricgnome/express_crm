@@ -1,41 +1,39 @@
 'use strict';
 module.exports = {
   up: (queryInterface, Sequelize) => {
-    return queryInterface.createTable('users', {
+    return queryInterface.createTable('policies', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      firstName: {
+      policy_id: {
         type: Sequelize.STRING
       },
-      lastName: {
+      carrier: {
         type: Sequelize.STRING
       },
-      email: {
-        type: Sequelize.STRING,
-        
+      policy_type: {
+        type: Sequelize.STRING
       },
-      personal_email: {
-        type: Sequelize.STRING,
-        
+      agent: {
+        type: Sequelize.STRING
       },
-      phone: {
-        type: Sequelize.STRING,
-        
+      down_payment: {
+        type: Sequelize.DECIMAL(5,2)
       },
-      personal_phone: {
-        type: Sequelize.STRING,
-        
+      premium: {
+        type: Sequelize.DECIMAL(5,2)
       },
-      active: {
-        type: Sequelize.BOOLEAN,
-        
+      effective_date: {
+        type: Sequelize.DATEONLY
       },
-      passcrypt: {
-        type: Sequelize.STRING(40106)
+      renewal_date: {
+        type: Sequelize.DATEONLY
+      },
+      status: {
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,
@@ -48,6 +46,6 @@ module.exports = {
     });
   },
   down: (queryInterface, Sequelize) => {
-    return queryInterface.dropTable('users');
+    return queryInterface.dropTable('policies');
   }
 };
