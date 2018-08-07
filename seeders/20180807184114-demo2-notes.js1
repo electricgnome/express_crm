@@ -1,0 +1,30 @@
+'use strict';
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+  
+      return queryInterface.bulkInsert('notes', [{
+       note:JSON.stringify({note1:"some note"}),
+       created_by: 1,
+       is_task: true,
+       category:'pop',
+       due_date: '08/24/2018',
+       agent_responsible: 2,
+       status:'open',
+       policyId: 1,
+       createdAt: new Date(),
+        updatedAt: new Date()
+      }], {});
+ 
+  },
+
+  down: (queryInterface, Sequelize) => {
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.bulkDelete('Person', null, {});
+    */
+  }
+};

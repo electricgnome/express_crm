@@ -18,6 +18,22 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      },
+      policyId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'policies',
+          key: 'id'
+        },
+        allowNull: false
+      },
+        customerId: {
+          type: Sequelize.INTEGER,
+          references: {
+            model: 'customers',
+            key: 'id'
+          },
+        allowNull: false
       }
     });
   },

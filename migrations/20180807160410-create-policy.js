@@ -21,10 +21,10 @@ module.exports = {
         type: Sequelize.STRING
       },
       down_payment: {
-        type: Sequelize.DECIMAL(5,2)
+        type: Sequelize.DECIMAL(6,2)
       },
       premium: {
-        type: Sequelize.DECIMAL(5,2)
+        type: Sequelize.DECIMAL(6,2)
       },
       effective_date: {
         type: Sequelize.DATEONLY

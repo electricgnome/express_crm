@@ -1,0 +1,26 @@
+'use strict';
+
+module.exports = {
+  up: (queryInterface, Sequelize) => {
+   
+      return queryInterface.bulkInsert('payments', [{
+        status: 'paid',
+        payment_number:2,       
+        payment_date: '08/24/2018',        
+        policyId: 1,
+        createdAt: new Date(),
+         updatedAt: new Date()
+      }], {});
+  
+  },
+
+  down: (queryInterface, Sequelize) => {
+    /*
+      Add reverting commands here.
+      Return a promise to correctly handle asynchronicity.
+
+      Example:
+      return queryInterface.bulkDelete('Person', null, {});
+    */
+  }
+};

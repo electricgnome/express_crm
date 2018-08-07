@@ -4,9 +4,9 @@ module.exports = (sequelize, DataTypes) => {
     policy_id: DataTypes.STRING,
     carrier: DataTypes.STRING,
     policy_type: DataTypes.STRING,
-    agent: DataTypes.STRING,
-    down_payment: DataTypes.DECIMAL(5,2),
-    premium: DataTypes.DECIMAL(5,2),
+    agent: DataTypes.INTEGER,
+    down_payment: DataTypes.DECIMAL(6,2),
+    premium: DataTypes.DECIMAL(6,2),
     effective_date: DataTypes.DATEONLY,
     renewal_date: DataTypes.DATEONLY,
     status: DataTypes.STRING

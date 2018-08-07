@@ -3,18 +3,30 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     
-      return queryInterface.bulkInsert('customer', [{
+      return queryInterface.bulkInsert('customers', [{
         first_name: 'John',
         last_name: 'Doe',
         birthdate: '01/01/1970',
-        contact: '',
-        gender: 1,
+        contact: JSON.stringify({phone:'9564558779',email:'jon@doe.com'}),
+        gender: true,
         marital_status: 'married',
         occupation: 'physician',
         id_type: 'dl',
         id_number: '10918371',
         address: '123 nowhere st',
-        
+        city: 'houston',
+        state: 'tx',
+        zip: '77040',
+        tickets: 0,
+        accidents: 0,
+        at_fault: false,
+        pref_lang:'english',
+        home_owner: true,
+        has_pop: '6 months',
+        status: 'active',
+        createdAt: new Date(),
+        updatedAt: new Date()
+
       }], {});
   },
 

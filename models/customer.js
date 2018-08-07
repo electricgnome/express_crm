@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     occupation: DataTypes.STRING,
     id_type: DataTypes.STRING,
     id_number: DataTypes.STRING,
-    adress: DataTypes.STRING,
+    address: DataTypes.STRING,
     city: DataTypes.STRING,
     state: DataTypes.STRING,
     zip: DataTypes.INTEGER,
@@ -19,7 +19,7 @@ module.exports = (sequelize, DataTypes) => {
     at_fault: DataTypes.BOOLEAN,
     pref_lang: DataTypes.STRING,
     home_owner: DataTypes.BOOLEAN,
-    has_pop: DataTypes.BOOLEAN,
+    has_pop: DataTypes.STRING,
     status: DataTypes.STRING
   }, {});
   customer.associate = function(models) {

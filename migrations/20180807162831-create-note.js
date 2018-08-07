@@ -36,7 +36,15 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
-      }
+      },
+      policyId: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'policies',
+          key: 'id'
+        },
+      allowNull: false
+    }
     });
   },
   down: (queryInterface, Sequelize) => {

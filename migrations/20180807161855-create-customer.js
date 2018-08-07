@@ -35,7 +35,7 @@ module.exports = {
       id_number: {
         type: Sequelize.STRING
       },
-      adress: {
+      address: {
         type: Sequelize.STRING
       },
       city: {
@@ -63,7 +63,7 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       has_pop: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.STRING
       },
       status: {
         type: Sequelize.STRING
