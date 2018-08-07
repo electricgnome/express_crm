@@ -2,16 +2,21 @@ let drivers = 1;
 let cars = 1;
 let vresult = [];
 let date1 = new Date();
-let email_name = $("#user").attr("value");
+let email_name = $("#user").attr("value") || "null@kappa.com";
 var v_user = email_name.split("@")[0];
+
 if (v_user !== "") {
   localStorage.setItem("user", v_user);
 }
+
 user = localStorage.getItem("user");
 var user_li = [];
+
 // date1.setDate(date1.getDate()+1);
 
+
 // =====chat app ==========
+
 var server = io();
 server.on("connect", function(socket) {
   console.log(user + " connected");
@@ -51,6 +56,7 @@ function send_message(event) {
   }
 }
 // =====end chat app =========
+
 
 function materialize() {
   $(".modal").modal();
