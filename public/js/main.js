@@ -83,9 +83,9 @@ function materialize() {
 
   $("input[type=radio][name=curr_insured_flag]").click(function() {
     if ($("input[type=radio][name=curr_insured_flag]:checked").val() === "0") {
-      jQuery("#pop").hide();
+      jQuery("#has_pop").hide();
     } else {
-      jQuery("#pop").show();
+      jQuery("#has_pop").show();
     }
   });
 
@@ -125,6 +125,12 @@ function materialize() {
 
       verify_vin(document.getElementById(`VIN${active_car}`).value, active_car);
     });
+
+
+
+   document.getElementById('driverCt').value = drivers;
+   document.getElementById('vehicleCt').value = cars;
+
 }
 
 // 1N4AL3AP6DN452526
@@ -149,8 +155,8 @@ function verify_vin(vin, active_car) {
         return 0;
       } else {
         console.log(result);
-        $(`#brand${active_car}`).val(
-          $(`#brand${active_car}`).val() + vresult.Results[0].Make
+        $(`#make${active_car}`).val(
+          $(`#make${active_car}`).val() + vresult.Results[0].Make
         );
         $(`#year${active_car}`).val(
           $(`#year${active_car}`).val() + vresult.Results[0].ModelYear
@@ -302,7 +308,7 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
             <br>
             <span class="c1">How many tickets have you had in the past 3 years?</span>
             <span class="c2">
-                <input type="number" min="0" max="4" value="0" name="num_tickets${drivers}">
+                <input type="number" min="0" max="4" value="0" name="tickets${drivers}">
             </span>
 
         </div>
@@ -313,17 +319,17 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
             <br>
             <span class="c1">How many accidents have you had in the past 3 years?</span>
             <span class="c2">
-                <input type="number" min="0" max="4" value="0" name="num_accidents${drivers}">
+                <input type="number" min="0" max="4" value="0" name="accidents${drivers}">
             </span>
             <br>
             <br> were any of these accidents at fault?
             <label>
-                <input class="with-gap" name="at_fault_flag${drivers}" type="radio" value="1" />
+                <input class="with-gap" name="at_fault${drivers}" type="radio" value="1" />
                 <span>Yes</span>
             </label>
 
             <label>
-                <input class="with-gap" name="at_fault_flag${drivers}" type="radio" value="0" checked/>
+                <input class="with-gap" name="at_fault${drivers}" type="radio" value="0" checked/>
                 <span>No</span>
             </label>
             <br>
@@ -370,7 +376,7 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
                         <input type="text" id="year${cars}" name="year${cars}" placeholder="year" />
                     </div>
                     <div class="input-field col s4 m3 ">
-                        <input type="text" id="brand${cars}" name="brand${cars}" placeholder="brand" />
+                        <input type="text" id="make${cars}" name="make${cars}" placeholder="make" />
                     </div>
                     <div class="input-field col s4 m3 ">
                         <input type="text" id="model${cars}" name="model${cars}" placeholder="model" />
@@ -413,13 +419,13 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
                             <div class="input-field col s6 offset-m2 m4">
                             <p>
                             <label>
-                                <input type="checkbox" name="pip_flag${cars}" value="1">
+                                <input type="checkbox" name="pip${cars}" value="1">
                                 <span>Personal Injury Protection (PIP)</span>
                             </label></p>
                             <br>
                             <p>
                             <label>
-                                <input type="checkbox" name="uninsured_motor_flag${cars}" value="1">
+                                <input type="checkbox" name="um${cars}" value="1">
                                 <span>Uninsured Motorist</span>
                             </label></p>
                             </div>
@@ -427,13 +433,13 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
                             <div class="input-field col s6 m4">
                             <p>
                             <label>
-                                <input type="checkbox" name="rental_flag${cars}" value="1">
+                                <input type="checkbox" name="rental${cars}" value="1">
                                 <span>Rental</span>
                             </label></p>
                             <br>
                             <p>
                             <label>
-                                <input type="checkbox" name="towing_flag${cars}" value="1">
+                                <input type="checkbox" name="towing${cars}" value="1">
                                 <span>Towing</span>
                             </label>
                             </p>

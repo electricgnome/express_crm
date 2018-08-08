@@ -31,7 +31,7 @@
                     <h6 class="center-align" class="fs-subtitle">Policy and comments</h6>
                     <div class="row">
                         <div class="input-field col s6 offset-m3 m3">
-                            <select name="pref_language" id="pref_language">
+                            <select name="pref_lang" id="pref_language">
                                 <option value="" disabled selected>Preffered Language</option>
                                 <option value="English">English</option>
                                 <option value="Spanish">Spanish</option>
@@ -117,20 +117,20 @@
                         </div>
 
                         <div class="input-field col s6 m3">
-                            <input name="policy_number" id="policy_number" type="text" class="counter" data-length="20">
-                            <label for="policy_number" class>Policy Number</label>
+                            <input name="policy_id" id="policy_id" type="text" class="counter" data-length="20">
+                            <label for="policy_id" class>Policy Number</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class=" input-field col s6 offset-m3 m3 ">
-                            <input name="premium_amt" id="premium_amt" type="text">
-                            <label for="premium_amt" class>Premium</label>
+                            <input name="premium" id="premium" type="text">
+                            <label for="premium" class>Premium</label>
                         </div>
 
                         <div class="input-field col s6 m3">
-                            <input name="payment_date" id="payment_date" type="text" class="datepicker">
-                            <label for="payment_date" class>Payment Date</label>
+                            <input name="effective_date" id="effective_date" type="text" class="datepicker">
+                            <label for="effective_date" class>Payment Date</label>
                         </div>
                     </div>
                     <div class="row">
@@ -156,8 +156,8 @@
                     </div>
                     <div class="row">
                         <div class=" input-field col s6 offset-m3 m3 ">
-                            <input name="down" id="down" type="text">
-                            <label for="down" class>Down Payment</label>
+                            <input name="down_payment" id="down_payment" type="text">
+                            <label for="down_payment" class>Down Payment</label>
                         </div>
                     </div>
                     <div class="divider"></div>
@@ -171,6 +171,11 @@
 
 
             </div>
+        </div>
+        <div>
+            <input type="hidden" id="driverCt" name="driverCt" value='0'>
+            <input type="hidden" id="vehicleCt" name="vehicleCt" value='0'>
+        
         </div>
     </form>
 </div>

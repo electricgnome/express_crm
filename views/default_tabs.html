@@ -175,7 +175,7 @@
                             <br>
                             <span class="c1">How many tickets have you had in the past 3 years?</span>
                             <span class="c2">
-                                <input type="number" min="0" max="4" value="0" name="num_tickets1">
+                                <input type="number" min="0" max="4" value="0" name="tickets1">
                             </span>
 
                         </div>
@@ -187,17 +187,17 @@
                             <br>
                             <span class="c1">How many accidents have you had in the past 3 years?</span>
                             <span class="c2">
-                                <input type="number" min="0" max="4" value="0" name="num_accidents1">
+                                <input type="number" min="0" max="4" value="0" name="accidents1">
                             </span>
                             <br>
                             <br> were any of these accidents at fault?
                             <label>
-                                <input class="with-gap" name="at_fault_flag1" type="radio" value="1" />
+                                <input class="with-gap" name="at_fault1" type="radio" value="1" />
                                 <span>Yes</span>
                             </label>
 
                             <label>
-                                <input class="with-gap" name="at_fault_flag1" type="radio" value="0" checked/>
+                                <input class="with-gap" name="at_fault1" type="radio" value="0" checked/>
                                 <span>No</span>
                             </label>
                             <br>
@@ -256,7 +256,7 @@
                         <input type="text" id="year1" name="year1" placeholder="year" />
                     </div>
                     <div class="input-field col s4 m3">
-                        <input type="text" id="brand1" name="brand1" placeholder="brand" />
+                        <input type="text" id="make1" name="make1" placeholder="brand" />
                     </div>
                     <div class="input-field col s4 m3">
                         <input type="text" id="model1" name="model1" placeholder="model" />
@@ -297,14 +297,14 @@
                             <div class="input-field col s6 offset-m2 m4">
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="pip_flag1" value="1" />
+                                        <input type="checkbox" name="pip1" value="1" />
                                         <span>Personal Injury Protection (PIP)</span>
                                     </label>
                                 </p>
                                 <br>
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="uninsured_motor_flag1" value="1" />
+                                        <input type="checkbox" name="um1" value="1" />
                                         <span>Uninsured Motorist</span>
                                     </label>
                                 </p>
@@ -313,14 +313,14 @@
                             <div class="input-field col s6 m4">
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="rental_flag1" value="1" />
+                                        <input type="checkbox" name="rental1" value="1" />
                                         <span>Rental</span>
                                     </label>
                                 </p>
                                 <br>
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="towing_flag1" value="1" />
+                                        <input type="checkbox" name="towing1" value="1" />
                                         <span>Towing</span>
                                     </label>
                                 </p>
@@ -342,12 +342,12 @@
         <div class="input-field col s12 offset-m2 m8">
             <div>&nbsp;&nbsp;Are you a Home Owner: &nbsp;&nbsp;&nbsp;
                 <label>
-                    <input class="with-gap" name="homeowner_flag" type="radio" value="0" checked/>
+                    <input class="with-gap" name="home_owner" type="radio" value="0" checked/>
                     <span>No</span>
                 </label>
                 &nbsp;&nbsp;
                 <label>
-                    <input class="with-gap" name="homeowner_flag" type="radio" value="1" />
+                    <input class="with-gap" name="home_owner" type="radio" value="1" />
                     <span>Yes</span>
                 </label>
 
@@ -359,11 +359,11 @@
     such as 'Insurance ID cards' in order to have the discount applied.">&nbsp;&nbsp;Are you currently Insured (personal auto):</span>
                 <br>
                 <label>
-                    <input class="with-gap" name="curr_insured_flag" type="radio" value="0" checked />
+                    <input class="with-gap" name="has_pop" type="radio" value="0" checked />
                     <span>No</span>
                 </label>
                 <label>
-                    <input class="with-gap" name="curr_insured_flag" type="radio" value="1" />
+                    <input class="with-gap" name="has_pop" type="radio" value="1" />
                     <span>Yes</span>
                 </label>
 
@@ -386,7 +386,7 @@
                         <label>Length of coverage without lapse:</label>
                     </div>
                     <div class="input-field col s6 offset-s1 m4">
-                        <input type="text" name="carrier" placeholder="with who? (Geico, progressive, etc...)" />
+                        <input type="text" name="pop_carrier" placeholder="with who? (Geico, progressive, etc...)" />
 
                     </div>
                 </div>

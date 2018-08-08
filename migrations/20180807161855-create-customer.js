@@ -21,7 +21,7 @@ module.exports = {
         type: Sequelize.JSON
       },
       gender: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.STRING
       },
       marital_status: {
         type: Sequelize.STRING
@@ -63,6 +63,12 @@ module.exports = {
         type: Sequelize.BOOLEAN
       },
       has_pop: {
+        type: Sequelize.BOOLEAN
+      },
+      pop_length: {
+        type: Sequelize.STRING
+      },
+      pop_carrier: {
         type: Sequelize.STRING
       },
       status: {

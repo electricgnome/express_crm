@@ -158,11 +158,78 @@ app.get("/customer", function (request, response) {
   response.render("customer.html");
 });
 
+
+// ===== === == == = = = == = = = = = == = = = == = = = = == = = = = = = =
 app.post("/success", function (request, response, next) {
   var data = request.body
-  // console.log(data.first_name1)
-  response.render("success2.html", {data});
-});
+  console.table(data)
+  
+     db.customer
+       .create({
+         first_name: data.first_name1,
+         last_name: data.last_name1,
+         birthdate: data.birthdate1,
+         contact: data.contact,       //turn to json
+         gender: data.gender1,
+         marital_status: data.marital_status1,
+         occupation: data.occupation1, 
+         id_type: data.id_type1,
+         id_number: data.id_number1,
+         address: data.address,
+         city: data.city,
+         state: data.state,
+         zip: data.zip,
+         tickets: data.tickets1,
+         accidents: data.accidents1,
+         at_fault: data.at_fault1,
+         pref_lang: data.pref_lang,
+         home_owner:data.home_owner,
+         has_pop: data.has_pop,
+         pop_length: data.pop_length,
+         pop_carrier:data.pop_carrier,
+         status: data.status
+
+       })
+
+       db.policy.create({
+         policy_id: data.policy_id,
+         carrier: data.carrier,
+         // policy_type: data.
+         agent: data.agent,
+         down_payment: data.down_payment,
+         premium: data.premium,
+         effective_date: data.effective_date,
+         // renewal_date: data.renewal_date
+         status: data.status
+       })
+
+       db.driver.create({
+         relation: data.relation1,
+         'customerId': 3,             //Fix
+         'policyId': 4               //Fix
+       })
+
+       db.vehicle.create({
+         vin: data.VIN1,
+         year: data.year1,
+         make: data.make1,
+         model: data.model1,
+         coverage: data.coverage1,
+         deductible: data.deductible1,
+         pip: data.pip1,
+         um: data.um1,
+         rental: data.rental1,
+         towing: data.towing1,
+         policyId: 4              //fix
+       })
+       .then(data => {         
+        response.render("success.html", {data});
+       })
+       .catch(next)
+ });
+  
+  
+
 
 
 

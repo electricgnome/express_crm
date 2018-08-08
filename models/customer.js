@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
     last_name: DataTypes.STRING,
     birthdate: DataTypes.DATEONLY,
     contact: DataTypes.JSON,
-    gender: DataTypes.BOOLEAN,
+    gender: DataTypes.STRING,
     marital_status: DataTypes.STRING,
     occupation: DataTypes.STRING,
     id_type: DataTypes.STRING,
@@ -19,7 +19,10 @@ module.exports = (sequelize, DataTypes) => {
     at_fault: DataTypes.BOOLEAN,
     pref_lang: DataTypes.STRING,
     home_owner: DataTypes.BOOLEAN,
-    has_pop: DataTypes.STRING,
+    has_pop: DataTypes.BOOLEAN,
+    pop_length: DataTypes.STRING,
+    pop_carrier: DataTypes.STRING,
+
     status: DataTypes.STRING
   }, {});
   customer.associate = function(models) {

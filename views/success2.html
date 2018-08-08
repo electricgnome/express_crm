@@ -1,0 +1,418 @@
+{% extends "base.html" %} {% block title %}Quote Request submitted successfully!!{% endblock %} {% block content %}
+
+<div class="container z-depth-5" style="margin-top:20px;">
+
+    <form class="col s6" action="success" method="POST" id="form">
+        <div class="card">
+            <div class="card-tabs">
+                <ul class="tabs tabs-fixed-width">
+                    <li class="tab">
+                        <a class="active" href="#drivers">Drivers</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#vehicles">Vehicles</a>
+                    </li>
+                    <li class="tab">
+                        <a href="#discounts">Discounts</a>
+                    </li>
+                    <!-- <li class="tab">
+                        <a href="#lienholder">Lien Holder</a>
+                    </li> -->
+                </ul>
+            </div>
+            <!-- <div class="card-content">
+                Some stuff here
+            </div> -->
+            <div class="card-content grey lighten-4 padding-0">
+
+                <div id="drivers">
+                    <div class="card z-depth-0">
+                        <div class="card-tabs">
+                            <ul class="tabs" id="driver_tabs">
+                                <li class="tab">
+                                    <a href="#driver1" class="active">Primary</a>
+                                </li>
+                                <li class="tab" id="add_li">
+                                    <a href="#add" id="add_btn">
+                                        <i class="material-icons prefix">person_add</i>
+                                    </a>
+                                </li>
+
+                            </ul>
+                        </div>
+                        <div class="card-content grey lighten-4">
+                            <div id="driver1" value=1>
+
+                                <h5 class="center-align">Primary Driver information</h5>
+                                <!-- <h6 class="center-align">This is step 1</h6> -->
+                                <div class="row">
+                                    <div class="input-field col s6 offset-m3 m3">
+                                        <input name="first_name1" id="first_name1" type="text" class="validate" value="{{ data.first_name1 }}" required>
+                                        <label for="first_name1">First Name</label>
+                                    </div>
+
+                                    <div class="input-field col s6  m3">
+                                        <input name="last_name1" id="last_name1" type="text" class="validate" value="{{ data.last_name1 }}" required>
+                                        <label for="last_name1">Last Name</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s6 offset-m3 m3">
+                                        <input name="cell_phone" id="cell_phone" type="number" class="validate counter" data-length="10" value="{{ data.cell_phone }}"
+                                            required>
+                                        <label for="cel_phone1">cell phone</label>
+                                    </div>
+
+                                    <div class="input-field col s6 m3">
+                                        <input name="email" id="email" type="email" class="validate" value="{{ data.email }}">
+                                        <label for="email">Email</label>
+                                    </div>
+
+                                </div>
+                                <div class="divider"></div>
+                                <div class="row">
+                                    <div class="col s6 offset-m3 m3">
+
+                                        <p>
+                                            <label>
+                                                <input class="with-gap" name="gender1" type="radio" value="male" {% if data.gender1=="male" %} checked {% endif %} />
+                                                <span>Male</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input class="with-gap" name="gender1" type="radio" value="female" {% if data.gender1=="female" %} checked {% endif %} />
+                                                <span>Female</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                    <div class="col s6 m3">
+                                        <p>
+                                            <label>
+                                                <input class="with-gap" name="marital_status1" type="radio" value="single" {% if data.marital_status1=="single" %} checked
+                                                    {% endif %} />
+                                                <span>Single</span>
+                                            </label>
+                                        </p>
+                                        <p>
+                                            <label>
+                                                <input class="with-gap" name="marital_status1" type="radio" value="married" {% if data.marital_status1=="married" %} checked
+                                                    {% endif %}/>
+                                                <span>Married</span>
+                                            </label>
+                                        </p>
+                                    </div>
+                                </div>
+                                <div class="divider"></div>
+                                <div class="row">
+                                    <div class="input-field col s12 offset-m3 m6">
+                                        <input name="occupation1" id="occupation1" type="text" value="{{ data.occupation1 }}">
+                                        <label for="occupation1">Occupation</label>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="input-field col s6 offset-m3 m3">
+                                        <label for="birthdate1" class>birthdate</label>
+                                        <input name="birthdate1" id="birthdate1" type="text" class="datepicker" class="validate" value="{{ data.birthdate1 }}" required>
+
+
+                                    </div>
+
+                                    <div class="input-field col s6 m3">
+                                        <select name="relation1" id="relation1">
+                                            <option class="flow-text" value="{{ data.relation1 }}" selected>{{ data.relation1 }}</option>
+                                            <option value="spouse">Spouse/common law</option>
+                                            <option value="sibiling">Sibiling</option>
+                                            <option value="parent">Parent</option>
+                                            <option value="child">Child</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <label>Relation to primary driver:</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s6 offset-m3 m3">
+                                        <select name="id_type1" id="id_type1">
+                                            <option value="{{ data.id_type1 }}" selected>{{ data.id_type1 }}</option>
+                                            <option value="Tx ID">Texas ID</option>
+                                            <option value="Out of state">Out of state</option>
+                                            <option value="passport">Passport</option>
+                                            <option value="matricula">Matricula</option>
+                                            <option value="International DL">International Drivers License</option>
+                                            <option value="no ID">No ID</option>
+                                        </select>
+                                        <label>Form of ID (Choose one):</label>
+                                    </div>
+                                    <div class="input-field col s6 m3">
+                                        <label for="id_numnber1">ID Number</label>
+                                        <input name="id_numnber1" id="id_numnber1" type="text" class="counter" data-length="20" value="{{ data.id_numnber1 }}">
+
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s6 offset-m3 m3">
+                                        <input name="address" id="address" type="text" class="validate" required value="{{ data.address }}">
+                                        <label for="address">Street Address</label>
+                                    </div>
+
+                                    <div class="input-field col s6 m3">
+                                        <input name="city" id="city" type="text" value="{{ data.city }}" class="validate" required>
+                                        <label for="city">City</label>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="input-field col s6 offset-m3 m3">
+                                        <input name="state" id="state" type="text" value="{{ data.state }}" class="validate" required>
+                                        <label for="state">State</label>
+                                    </div>
+
+                                    <div class="input-field col s6 m3">
+                                        <input name="zip" id="zip" type="text" class="validate counter" data-length="5" required value="{{ data.zip }}">
+                                        <label for="zip">Zip Code</label>
+                                    </div>
+                                </div>
+                                <h5 class="center-align">Accidents or Tickets?</h5>
+                                <h6 class="center-align">Please be honest. Your record will be verified. You may get a disclousre discount</h6>
+                                <br>
+
+                                <br>
+                                <div class="row">
+                                    <div class="col s6 offset-m3 m3">
+                                        Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
+
+                                        <label>
+                                            <input class="with-gap" name="accident_tickets_flag1" acc="1" type="radio" value="1" {% if data.accident_tickets_flag1=="1"
+                                                %} checked {% endif %} />
+                                            <span>Yes</span>
+                                        </label>
+
+                                        <label>
+                                            <input class="with-gap" name="accident_tickets_flag1" acc="1" type="radio" value="0" {% if data.accident_tickets_flag1=="0"
+                                                %} checked {% endif %}/>
+                                            <span>No</span>
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="accidents1">
+                                    <div class="row">
+                                        <div class="col s6 offset-m3 m3">
+                                            <span class="tooltip"></span>
+                                            <br>
+                                            <span class="c1">How many tickets have you had in the past 3 years?</span>
+                                            <span class="c2">
+                                                <input type="number" min="0" max="4" value="{{ data.tickets1 }}" name="tickets1">
+                                            </span>
+
+                                        </div>
+
+
+
+                                        <div class="col s6 m3">
+                                            <span class="tooltip"></span>
+                                            <br>
+                                            <span class="c1">How many accidents have you had in the past 3 years?</span>
+                                            <span class="c2">
+                                                <input type="number" min="0" max="4" value="{{ data.accidents1 }}" name="accidents1">
+                                            </span>
+                                            <br>
+                                            <br> At Fault:{% if data.at_fault1 == "1" %} Yes {% else %} No {% endif %}
+                                            <label>
+
+                                            </label>
+                                            <br>
+                                            <br>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                            <div id='add_div'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="vehicles">
+                    <div id="modal1" class="modal">
+                        <div class="modal-content">
+                            <h4>No Matching VIN</h4>
+                            <p id="error_msg"></p>
+                        </div>
+                        <div class="modal-footer">
+                            <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
+                        </div>
+                    </div>
+                    <div class="card  z-depth-0">
+                        <div class="card-tabs">
+                            <ul class="tabs" id="cars_tabs">
+                                <li class="tab">
+                                    <a href="#vehicle1" class="active">Vehicle 1</a>
+                                </li>
+                                <li class="tab" id="add_car_li">
+                                    <a href="#add_car_lnk" id="add_car_btn">
+                                        <i class="material-icons prefix">directions_car</i>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="card-content grey lighten-4">
+                            <div id="vehicle1">
+                                <h5 class="center-align" class="fs-title">Vehicle 1</h5>
+                                <h6 class="center-align" class="fs-subtitle">What Vehicle are we insuring today?</h6>
+                                <div class="row">
+                                    <div class="input-field col s3 offset-m3 m3">
+                                        <input type="text" id="VIN1" name="VIN1" placeholder="(VIN) Vehicle Identification Number" class="counter" data-length="17"
+                                            value="{{ data.VIN1 }}" required />
+                                        <label for="VIN1">(VIN) Vehicle Identification Number</label>
+                                    </div>
+                                    <div class="col s3 offset-m1 m3">
+                                        <a class="btn waves-effect waves-light" name="verify_vin" id="verify_vin1" value="1">verify VIN
+                                        </a>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="input-field col s3 offset-m1 m3">
+                                        <input type="text" id="year1" name="year1" placeholder="year" value="{{ data.year1 }}" />
+                                    </div>
+                                    <div class="input-field col s3">
+                                        <input type="text" id="make1" name="make1" placeholder="brand" value="{{ data.make1 }}" />
+                                    </div>
+                                    <div class="input-field col s3 ">
+                                        <input type="text" id="model1" name="model1" placeholder="model" value="{{ data.model1 }}" />
+                                    </div>
+                                </div>
+
+                                <div id="coverages">
+                                    <h5 class="center-align">Coverage</h5>
+                                    <h6 class="center-align">How much coverage do you want?</h6>
+                                    <br>
+                                    <br>
+                                    <div class="row">
+                                        <div class="input-field col s6 offset-m2 m4">
+                                            <select name="coverage1" id="selects_field" value="1">
+
+                                                <option value="liability" {% if data.coverage1=="liability" %} selected {% endif %}>Liability Only</option>
+                                                <option value="full_coverage" {% if data.coverage1=="full_coverage" %} selected {% endif %}>Comprihensive/Collision(Full Coverage)</option>
+                                            </select>
+                                            <label>How much coverage do you want:</label>
+                                        </div>
+                                        <div class="input-field col s6  m3">
+                                            <select name="deductible1" id="selects_field" value="1">
+                                                <option value="500" {% if data.deductible1=="500" %} selected {% endif %}>$500.00</option>
+                                                <option value="1000" {% if data.deductible1=="1000" %} selected {% endif %}>$1,000.00</option>
+                                                <option value="0" {% if data.coverage1=="liability" %} selected {% endif %}>None</option>
+                                            </select>
+                                            <label>Desired Deductible:</label>
+                                        </div>
+                                    </div>
+                                    <div id="full_cover1">
+
+                                        <div style="text-align:left">
+                                            <br>
+                                            <h5 class="center-align">Additional coverage:</h5>
+                                            <br>
+                                            <div class="row">
+                                                <div class="input-field col s6 offset-m2 m4">
+                                                    <input type="checkbox" name="pip1" {% if data.pip1 %} checked {% endif %} value="1">
+                                                    <span>Personal Injury Protection (PIP)</span>
+                                                    <br>
+                                                    <input type="checkbox" name="um1" {% if data.um1 %} checked {% endif %} value="1">
+                                                    <span>Uninsured Motorist</span>
+                                                </div>
+
+                                                <div class="input-field col s6 m4">
+                                                    <input type="checkbox" name="rental1" {% if data.rental1 %} checked {% endif %} value="1">
+                                                    <span>Rental</span>
+                                                    <br>
+                                                    <input type="checkbox" name="towing1" {% if data.towing1 %} checked {% endif %} value="1">
+                                                    <span>Towing</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id='add_car'></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="discounts">
+                    <h5 class="center-align">Discounts</h5>
+                    <h6 class="center-align">Lets see what discounts you qualify for</h6>
+                    <div class="row">
+                        <div class="input-field col s6 offset-m2 m4">
+                            <div>
+                                Are you a Home Owner: &nbsp;&nbsp;&nbsp;
+                                <label>
+                                    <input class="with-gap" name="home_owner" type="radio" value="1" {% if data.home_owner=="1" %} checked {% endif %}/>
+                                    <span>Yes</span>
+                                </label>
+
+                                <label>
+                                    <input class="with-gap" name="home_owner" type="radio" value="0" {% if data.home_owner=="0" %} checked {% endif %}/>
+                                    <span>No</span>
+                                </label>
+                            </div>
+                            <div>
+                                <span class="tooltipped" data-position="top" data-tooltip="6 and 12 months qualify you for a discount. You will need to provide proof of prior insurance,
+    such as 'Insurance ID cards' in order to have the discount applied.">Are you currently Insured (personal auto):</span> &nbsp;
+
+                                <label>
+                                    <input class="with-gap" name="pop" type="radio" value="1" {% if data.pop=="1" %} checked {% endif
+                                        %} />
+                                    <span>Yes</span>
+                                </label>
+                                <label>
+                                    <input class="with-gap" name="pop" type="radio" value="0" {% if data.pop=="0" %} checked {% endif
+                                        %} />
+                                    <span>No</span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="pop">
+                        <span class="level">
+                            <div class="wrapper">
+                              
+                                <span class="tooltip"></span>
+
+                                <div class="row">
+                                    <div class="input-field col s6 offset-m2 m4">
+                                        <select name="pop_length" id="selects_field">
+                                            <option value="less_than_6" {% if data.pop_length=="less_than_6" %} selected {% endif %}>Less than 6 months</option>
+                                            <option value="6_months" {% if data.pop_length=="6_months" %} selected {% endif %}>6 to 11 months</option>
+                                            <option value="12_months" {% if data.pop_length=="12_months" %} selected {% endif %}>12 months or longer</option>
+                                        </select>
+                                        <label>How long have you had auto insurance (without a lapse in coverage):</label>
+                                    </div>
+                                    <div class="input-field col s6 m4">
+                                        <input type="text" name="pop_carrier" placeholder="with who? (Geico, progressive, etc...)" value="{{ data.pop_carrier }}" />
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </span>
+
+
+                    </div>
+
+                    {#
+                    <div id="buttons">
+
+                        <button class="btn waves-effect waves-light" type="submit" name="action">Save changes
+
+                        </button>
+                    </div> #}
+                </div>
+
+
+
+
+                {% endblock %}
