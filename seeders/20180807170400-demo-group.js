@@ -3,6 +3,26 @@
 module.exports = {
   up: (queryInterface, Sequelize) => {
     queryInterface.bulkInsert(
+      "policies",
+      [
+        {
+          policy_id: "q100",
+          carrier: "progressive",
+          policy_type: "personal auto",
+          agent: 1,
+          down_payment: "1500.49",
+          premium: "1210.34",
+          effective_date: new Date(),
+          renewal_date: new Date(),
+          status: "quote",
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+      ],
+      {}
+    );
+
+    queryInterface.bulkInsert(
       "customers",
       [
         {
@@ -37,18 +57,17 @@ module.exports = {
     );
 
     queryInterface.bulkInsert(
-      "policies",
+      "notes",
       [
         {
-          policy_id: "q100",
-          carrier: "progressive",
-          policy_type: "personal auto",
-          agent: 1,
-          down_payment: "1500.49",
-          premium: "1210.34",
-          effective_date: new Date(),
-          renewal_date: new Date(),
-          status: "quote",
+          note: JSON.stringify({ note1: "some note" }),
+          created_by: 1,
+          is_task: true,
+          category: "pop",
+          due_date: "08/24/2018",
+          agent_responsible: 2,
+          status: "open",
+          policyId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         }
@@ -63,25 +82,6 @@ module.exports = {
           relation: "self",
           policyId: "1",
           customerId: "1",
-          createdAt: new Date(),
-          updatedAt: new Date()
-        }
-      ],
-      {}
-    );
-
-    queryInterface.bulkInsert(
-      "notes",
-      [
-        {
-          note: JSON.stringify({ note1: "some note" }),
-          created_by: 1,
-          is_task: true,
-          category: "pop",
-          due_date: "08/24/2018",
-          agent_responsible: 2,
-          status: "open",
-          policyId: 1,
           createdAt: new Date(),
           updatedAt: new Date()
         }
@@ -128,12 +128,13 @@ module.exports = {
   },
 
   down: (queryInterface, Sequelize) => {
-    /*
-      Add reverting commands here.
-      Return a promise to correctly handle asynchronicity.
-
-      Example:
-      return queryInterface.bulkDelete('Person', null, {});
-    */
+    //  return sequelize.query("TRUNCATE TABLE customers drivers notes payments policies vehicles ")
+    queryInterface.bulkDelete("policies", null, {});
+    queryInterface.bulkDelete("tasks", null, {});
+    queryInterface.bulkDelete("customers", null, {});
+    queryInterface.bulkDelete("drivers", null, {});
+    queryInterface.bulkDelete("vehicles", null, {});
+    queryInterface.bulkDelete("payments", null, {});
+    return queryInterface.bulkDelete("notes", null, {});
   }
 };

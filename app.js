@@ -130,7 +130,24 @@ app.get("/logout", function(request, response) {
 //Todo APPl
 
 app.get("/", function(request, response) {
-  response.render("index.html");
+  db.customer
+  .findAll({
+    attrributes: [
+      "first_name",
+      "zip",
+      "id_number",
+      "occupation",
+      "city",
+      "address",
+      // "task",
+      // "carrier",
+      // "policy"
+    ],
+    order: ["first_name", "city"]
+  })
+  .then(customers => {
+    response.render("index.html", { customers })
+  })
 });
 
 app.get("/quote", function (request, response) {
