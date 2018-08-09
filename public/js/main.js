@@ -81,11 +81,11 @@ function materialize() {
 
   $("input.counter").characterCounter();
 
-  $("input[type=radio][name=curr_insured_flag]").click(function() {
-    if ($("input[type=radio][name=curr_insured_flag]:checked").val() === "0") {
-      jQuery("#has_pop").hide();
+  $("input[type=radio][name=has_pop]").click(function() {
+    if ($("input[type=radio][name=has_pop]:checked").val() === "0") {
+      jQuery("#pop_info").hide();
     } else {
-      jQuery("#has_pop").show();
+      jQuery("#pop_info").show();
     }
   });
 
@@ -123,7 +123,7 @@ function materialize() {
     .on("click", function() {
       var active_car = this.getAttribute("value");
 
-      verify_vin(document.getElementById(`VIN${active_car}`).value, active_car);
+      verify_vin(document.getElementById(`vin${active_car}`).value, active_car);
     });
 
 
@@ -133,7 +133,7 @@ function materialize() {
 
 }
 
-// 1N4AL3AP6DN452526
+// Nissan 1N4AL3AP6DN452526
 function verify_vin(vin, active_car) {
   console.log("verify vin: " + active_car);
   vresult;
@@ -362,7 +362,7 @@ Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
                 <h6 class="center-align" class="fs-subtitle">What Vehicle are we insuring today?</h6>
                 <div class="row">
                     <div class="input-field col s7 offset-m3 m3">
-                        <input type="text" id="VIN${cars}" name="VIN${cars}" placeholder="(VIN) Vehicle Identification Number"   class="counter" data-length="17" required />
+                        <input type="text" id="vin${cars}" name="vin${cars}" placeholder="(VIN) Vehicle Identification Number"   class="counter" data-length="17" required />
                        
                     </div>
                     <div class="col s3 m3">
