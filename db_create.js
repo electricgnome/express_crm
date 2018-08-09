@@ -1,10 +1,14 @@
+const db = require("./models");
 
-function dataToCustomer (customerData) {
+function dataToCustomer(customerData) {
   return {
     first_name: customerData.first_name1,
     last_name: customerData.last_name1,
     birthdate: customerData.birthdate1,
-    contact: customerData.contact, // FIXME: turn to json
+    contact: JSON.stringify({
+      phone: customerData.cell_phone,
+      email: customerData.email
+    }),
     gender: customerData.gender1,
     marital_status: customerData.marital_status1,
     occupation: customerData.occupation1,
@@ -23,10 +27,10 @@ function dataToCustomer (customerData) {
     pop_length: customerData.pop_length,
     pop_carrier: customerData.pop_carrier,
     status: customerData.status
-  }
+  };
 }
 
-function dataToPolicy (customerData) {
+function dataToPolicy(customerData) {
   return {
     policy_id: customerData.policy_id,
     carrier: customerData.carrier,
@@ -37,104 +41,59 @@ function dataToPolicy (customerData) {
     effective_date: customerData.effective_date,
     // renewal_date: customerData.renewal_date
     status: customerData.status
-  }
+  };
 }
 
-function dataToDriver (customerData) {
+function dataToDriver(customerData, customerId, policyId) {
   return {
     relation: customerData.relation1,
-    customerId: 1, // FIXME
-    policyId: 2 // FIXME
-  }
+    customerId: customerId,
+    policyId: policyId
+  };
 }
 
-
-function dataToVehicle (customerData) {
+function dataToVehicle(customerData, policyId, i) {
   return {
-    vin: customerData.vin1,
-    year: customerData.year1,
-    make: customerData.make1,
-    model: customerData.model1,
-    coverage: customerData.coverage1,
-    deductible: customerData.deductible1,
-    pip: customerData.pip1,
-    um: customerData.um1,
-    rental: customerData.rental1,
-    towing: customerData.towing1,
-    policyId: 2 // FIXME
-  }
-}
+    vin: customerData['vin'+i],
+    year: customerData['year'+i],
+    make: customerData['make'+i],
+    model: customerData['model'+i],
+    coverage:customerData['coverage'+i],
+    deductible: customerData['deductible'+i],
+    pip: customerData['pip'+i],
+    um: customerData['um'+i],
+    rental: customerData['rental'+i],
+    towing: customerData['towing'+i],
+    policyId: policyId 
+  };
 
-function insertThings (customerData, nextFn) {
-  db.customer.create(dataToCustomer(customerData))
-  db.policy.create(dataToPolicy(customerData))
-  db.driver.create(dataToDriver(customerData))
-  db.vehicle.create(dataToVehicle(customerData))
-    .then(customerData => {
-      response.render('success.html', {customerData})
-    })
-    .catch(nextFn)
 }
 
 
+function addVehicles(customerData, policyId) {
+  for (let i=0; i < customerData.vehicleCt; i++){
+   db.vehicle.create(dataToVehicle(customerData, policyId, i))
+}
+}
 
-// db.customer.create({
-//   first_name: customerData.first_name1,
-//   last_name: customerData.last_name1,
-//   birthdate: customerData.birthdate1,
-//   contact: JSON.stringify({
-//     phone:`${customerData.cell_phone}`,
-//     email:`${customerData.email}`
-//   }),
-//   gender: customerData.gender1,
-//   marital_status: customerData.marital_status1,
-//   occupation: customerData.occupation1,
-//   id_type: customerData.id_type1,
-//   id_number: customerData.id_number1,
-//   address: customerData.address,
-//   city: customerData.city,
-//   state: customerData.state,
-//   zip: customerData.zip,
-//   tickets: customerData.tickets1,
-//   accidents: customerData.accidents1,
-//   at_fault: customerData.at_fault1,
-//   pref_lang: customerData.pref_lang,
-//   home_owner: customerData.home_owner,
-//   has_pop: customerData.has_pop,
-//   pop_length: customerData.pop_length,
-//   pop_carrier: customerData.pop_carrier,
-//   status: customerData.status
-// });
+function dataToTables(customerData, nextFn) {
 
-// db.policy.create({
-//   policy_id: customerData.policy_id,
-//   carrier: customerData.carrier,
-//   // policy_type: customerData.
-//   agent: customerData.agent,
-//   down_payment: customerData.down_payment,
-//   premium: customerData.premium,
-//   effective_date: customerData.effective_date,
-//   // renewal_date: customerData.renewal_date
-//   status: customerData.status
-// });
 
-// db.driver.create({
-//   relation: customerData.relation1,
-//   customerId: 2, //Fix
-//   policyId: 2 //Fix
-// });
+  Promise.resolve(db.customer.create(dataToCustomer(customerData))).then(
+    result => {
+      let customerId = result.id;
+      console.log("customer ID: " + customerId);
+      Promise.resolve(db.policy.create(dataToPolicy(customerData))).then(
+        result => {
+          let policyId = result.id;
+          Promise.all([
+            db.driver.create(dataToDriver(customerData, customerId, policyId)),
+            addVehicles(customerData, policyId)
+          ]);
+        }
+      );
+    }
+  );
+}
 
-// db.vehicle
-//   .create({
-//     vin: customerData.VIN1,
-//     year: customerData.year1,
-//     make: customerData.make1,
-//     model: customerData.model1,
-//     coverage: customerData.coverage1,
-//     deductible: customerData.deductible1,
-//     pip: customerData.pip1,
-//     um: customerData.um1,
-//     rental: customerData.rental1,
-//     towing: customerData.towing1,
-//     policyId: 2 //fix
-//   })
+exports.dataToTables = dataToTables;

@@ -11,6 +11,7 @@ pbkdf2 = require("pbkdf2");
 passhelper = require("pbkdf2-helpers");
 crypto = require("crypto");
 
+let db_create = require("./db_create");
 let connection;
 
 const db = require("./models"); //for use with sequelize
@@ -64,6 +65,7 @@ app.use(function(request, response, next) {
     response.redirect("/login");
   }
 });
+// =======================       ===================
 
 app.get("/register", function(request, response) {
   response.render("register.html");
@@ -94,6 +96,8 @@ app.post("/register", function(request, response) {
   }
 });
 
+// ============================== ======================
+
 app.get("/login", function(request, response) {
   response.render("login.html");
 });
@@ -121,7 +125,7 @@ app.get("/logout", function(request, response) {
   response.redirect("login.html");
 });
 
-//Todo APPl
+// ======= APP START ==============
 
 app.get("/", function(request, response) {
   db.customer
@@ -152,95 +156,20 @@ app.get("/customer", function(request, response) {
   response.render("customer.html");
 });
 
-// ===== === == == = = = == = = = = = == = = = == = = = = == = = = = = = =
+//#############################+++++++++++#################################
+
 app.post("/success", function(request, response, next) {
-  let promises = [];
   let customerData = request.body;
   console.table(customerData);
 
-  function dataToCustomer(customerData) {
-    return {
-      first_name: customerData.first_name1,
-      last_name: customerData.last_name1,
-      birthdate: customerData.birthdate1,
-      contact: JSON.stringify({
-        phone: customerData.cell_phone,
-        email: customerData.email
-      }),
-      gender: customerData.gender1,
-      marital_status: customerData.marital_status1,
-      occupation: customerData.occupation1,
-      id_type: customerData.id_type1,
-      id_number: customerData.id_number1,
-      address: customerData.address,
-      city: customerData.city,
-      state: customerData.state,
-      zip: customerData.zip,
-      tickets: customerData.tickets1,
-      accidents: customerData.accidents1,
-      at_fault: customerData.at_fault1,
-      pref_lang: customerData.pref_lang,
-      home_owner: customerData.home_owner,
-      has_pop: customerData.has_pop,
-      pop_length: customerData.pop_length,
-      pop_carrier: customerData.pop_carrier,
-      status: customerData.status
-    };
-  }
-
-  function dataToPolicy(customerData) {
-    return {
-      policy_id: customerData.policy_id,
-      carrier: customerData.carrier,
-      // policy_type: customerData.
-      agent: customerData.agent,
-      down_payment: customerData.down_payment,
-      premium: customerData.premium,
-      effective_date: customerData.effective_date,
-      // renewal_date: customerData.renewal_date
-      status: customerData.status
-    };
-  }
-
-  function dataToDriver(customerData) {
-    return {
-      relation: customerData.relation1,
-      customerId: 1, // FIXME
-      policyId: 2 // FIXME
-    };
-  }
-
-  function dataToVehicle(customerData) {
-    return {
-      vin: customerData.vin1,
-      year: customerData.year1,
-      make: customerData.make1,
-      model: customerData.model1,
-      coverage: customerData.coverage1,
-      deductible: customerData.deductible1,
-      pip: customerData.pip1,
-      um: customerData.um1,
-      rental: customerData.rental1,
-      towing: customerData.towing1,
-      policyId: 2 // FIXME
-    };
-  }
-
-  function insertThings(customerData, nextFn) {
-    db.customer.create(dataToCustomer(customerData));
-    db.policy.create(dataToPolicy(customerData));
-    db.driver.create(dataToDriver(customerData));
-    db.vehicle
-      .create(dataToVehicle(customerData))
-
-      .then(customerData => {
-        response.redirect("/");
-      })
-      .catch(next);
-  }
-
-  insertThings(customerData);
+  Promise.resolve(db_create.dataToTables(customerData))
+    .then(result => {
+      response.redirect("/");
+    })
+    .catch(next);
 });
+
+//################################----------###############################
 
 app.get("/todos", function(request, response) {
   db.task.findAll({ include: [{ model: db.user }] }).then(tasks => {
