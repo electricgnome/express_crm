@@ -96,7 +96,7 @@ app.post("/register", function(request, response) {
   }
 });
 
-// ============================== ======================
+// ========================         ======================
 
 app.get("/login", function(request, response) {
   response.render("login.html");

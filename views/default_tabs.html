@@ -14,25 +14,25 @@
             </ul>
         </div>
         <div class="card-content grey lighten-4">
-            <div id="driver1" value=1>
+            <div id="driver" value=1>
 
                 <h5 class="center-align">Primary Driver information</h5>
                 <!-- <h6 class="center-align">This is step 1</h6> -->
                 <div class="row">
                     <div class="input-field col s6 offset-m3 m3">
-                        <input name="first_name1" id="first_name1" type="text" class="validate" required>
-                        <label for="first_name1">First Name</label>
+                        <input name="first_name" id="first_name" type="text" class="validate" required>
+                        <label for="first_name">First Name</label>
                     </div>
 
                     <div class="input-field col s6  m3">
-                        <input name="last_name1" id="last_name1" type="text" class="validate" required>
-                        <label for="last_name1">Last Name</label>
+                        <input name="last_name" id="last_name" type="text" class="validate" required>
+                        <label for="last_name">Last Name</label>
                     </div>
                 </div>
                 <div class="row">
                     <div class="input-field col s6 offset-m3 m3">
-                        <input name="cell_phone" id="cell_phone" type="number" class="validate counter" data-length="10" required>
-                        <label for="cel_phone1">cell phone</label>
+                        <input name="phone" id="phone" type="number" class="validate counter" data-length="10" required>
+                        <label for="phone">cell phone</label>
                     </div>
 
                     <div class="input-field col s6 m3">
@@ -47,13 +47,13 @@
 
                         <p>
                             <label>
-                                <input class="with-gap" name="gender1" type="radio" value="male" checked />
+                                <input class="with-gap" name="gender" type="radio" value="male" checked />
                                 <span>Male</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input class="with-gap" name="gender1" type="radio" value="female" />
+                                <input class="with-gap" name="gender" type="radio" value="female" />
                                 <span>Female</span>
                             </label>
                         </p>
@@ -61,13 +61,13 @@
                     <div class="col s6 m3">
                         <p>
                             <label>
-                                <input class="with-gap" name="marital_status1" type="radio" value="single" checked />
+                                <input class="with-gap" name="marital_status" type="radio" value="single" checked />
                                 <span>Single</span>
                             </label>
                         </p>
                         <p>
                             <label>
-                                <input class="with-gap" name="marital_status1" type="radio" value="married" />
+                                <input class="with-gap" name="marital_status" type="radio" value="married" />
                                 <span>Married</span>
                             </label>
                         </p>
@@ -79,21 +79,21 @@
                 <div class="divider"></div>
                 <div class="row">
                     <div class="input-field col s12 offset-m3 m6">
-                        <input name="occupation1" id="occupation1" type="text">
-                        <label for="occupation1">Occupation</label>
+                        <input name="occupation" id="occupation" type="text">
+                        <label for="occupation">Occupation</label>
                     </div>
                 </div>
                 <div class="row">
 
                     <div class="input-field col s6 offset-m3 m3">
-                        <label for="birthdate1" class>birthdate</label>
-                        <input name="birthdate1" id="birthdate1" type="text" class="datepicker validate" required>
+                        <label for="birthdate" class>birthdate</label>
+                        <input name="birthdate" id="birthdate" type="text" class="datepicker validate" required>
 
 
                     </div>
 
                     <div class="input-field col s6 m3">
-                        <select name="relation1" id="relation1">
+                        <select name="relation" id="relation">
                             <option class="flow-text" value="self" selected>Self</option>
                             <option value="spouse">Spouse/common law</option>
                             <option value="sibiling">Sibiling</option>
@@ -107,7 +107,7 @@
 
                 <div class="row">
                     <div class="input-field col s6 offset-m3 m3">
-                        <select name="id_type1" id="id_type1">
+                        <select name="id_type" id="id_type">
                             <option value="Tx DL" selected>Tx Drivers License</option>
                             <option value="Tx ID">Texas ID</option>
                             <option value="Out of state">Out of state</option>
@@ -119,8 +119,8 @@
                         <label>Form of ID (Choose one):</label>
                     </div>
                     <div class="input-field col s6 m3">
-                        <label for="id_number1">ID Number</label>
-                        <input name="id_number1" id="id_number1" type="text" class="counter" data-length="20">
+                        <label for="id_number">ID Number</label>
+                        <input name="id_number" id="id_number" type="text" class="counter" data-length="20">
 
                     </div>
 
@@ -158,24 +158,24 @@
                         Any accidents or tickets in the past 5 years: &nbsp;&nbsp;&nbsp;
 
                         <label>
-                            <input class="with-gap" name="accident_tickets_flag1" acc="1" type="radio" value="1" />
+                            <input class="with-gap" name="accident_tickets_flag" acc="1" type="radio" value="1" />
                             <span>Yes</span>
                         </label>
 
-                        <label>
-                            <input class="with-gap" name="accident_tickets_flag1" acc="1" type="radio" value="0" checked/>
+                        <label> //acc used to select active driver in jQuery
+                            <input class="with-gap" name="accident_tickets_flag" acc="1" type="radio" value="0" checked/>
                             <span>No</span>
                         </label>
                     </div>
                 </div>
-                <div class="optional" id="accidents1">
+                <div class="optional" id="accidents">
                     <div class="row">
                         <div class="col s6 offset-m3 m3">
                             <span class="tooltip"></span>
                             <br>
                             <span class="c1">How many tickets have you had in the past 3 years?</span>
                             <span class="c2">
-                                <input type="number" min="0" max="4" value="0" name="tickets1">
+                                <input type="number" min="0" max="4" value="0" name="tickets">
                             </span>
 
                         </div>
@@ -187,17 +187,17 @@
                             <br>
                             <span class="c1">How many accidents have you had in the past 3 years?</span>
                             <span class="c2">
-                                <input type="number" min="0" max="4" value="0" name="accidents1">
+                                <input type="number" min="0" max="4" value="0" name="accidents">
                             </span>
                             <br>
                             <br> were any of these accidents at fault?
                             <label>
-                                <input class="with-gap" name="at_fault1" type="radio" value="1" />
+                                <input class="with-gap" name="at_fault" type="radio" value="1" />
                                 <span>Yes</span>
                             </label>
 
                             <label>
-                                <input class="with-gap" name="at_fault1" type="radio" value="0" checked/>
+                                <input class="with-gap" name="at_fault" type="radio" value="0" checked/>
                                 <span>No</span>
                             </label>
                             <br>
@@ -236,30 +236,30 @@
             </ul>
         </div>
         <div class="card-content grey lighten-4">
-            <div id="vehicle1">
+            <div id="vehicle">
                 <h5 class="center-align" class="fs-title">Vehicle 1</h5>
                 <h6 class="center-align" class="fs-subtitle">What Vehicle are we insuring today?</h6>
                 <div class="row">
                     <div class="input-field col s7 offset-m3 m3">
-                        <input type="text" id="vin1" name="vin1" placeholder="(VIN) Vehicle Identification Number" class="counter" data-length="17"
+                        <input type="text" id="vin" name="vin" placeholder="(VIN) Vehicle Identification Number" class="counter" data-length="17"
                             required />
 
                     </div>
                     <div class="col s3  m3">
-                        <a class="btn waves-effect waves-light" name="verify_vin" id="verify_vin1" value="1">verify VIN
+                        <a class="btn waves-effect waves-light" name="verify_vin" id="verify_vin" value="1">verify VIN
                         </a>
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="input-field col s4 offset-m1 m3">
-                        <input type="text" id="year1" name="year1" placeholder="year" />
+                        <input type="text" id="year" name="year" placeholder="year" />
                     </div>
                     <div class="input-field col s4 m3">
-                        <input type="text" id="make1" name="make1" placeholder="brand" />
+                        <input type="text" id="make" name="make" placeholder="brand" />
                     </div>
                     <div class="input-field col s4 m3">
-                        <input type="text" id="model1" name="model1" placeholder="model" />
+                        <input type="text" id="model" name="model" placeholder="model" />
                     </div>
                 </div>
 
@@ -268,7 +268,7 @@
                     <h6 class="center-align">How much coverage do you want?</h6>
                     <div class="row">
                         <div class="input-field col s12 offset-m2 m6">
-                            <select name="coverage1" id="selects_field" value="1">
+                            <select name="coverage" id="selects_field" value="1">
 
                                 <option value="liability" selected>Liability Only</option>
                                 <option value="full_coverage">Comprihensive/Collision(Full Coverage)</option>
@@ -281,7 +281,7 @@
                     <div class="optional" id="full_cover1">
                         <div class="row">
                             <div class="input-field col s6 offset-m2 m2">
-                                <select name="deductible1" id="selects_field" value="1">
+                                <select name="deductible" id="selects_field" value="1">
                                     <option value="500">$500.00</option>
                                     <option value="1000">$1,000.00</option>
                                     <option value="0" selected>None</option>
@@ -297,14 +297,14 @@
                             <div class="input-field col s6 offset-m2 m4">
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="pip1" value="1" />
+                                        <input type="checkbox" name="pip" value="1" />
                                         <span>Personal Injury Protection (PIP)</span>
                                     </label>
                                 </p>
                                 <br>
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="um1" value="1" />
+                                        <input type="checkbox" name="um" value="1" />
                                         <span>Uninsured Motorist</span>
                                     </label>
                                 </p>
@@ -313,14 +313,14 @@
                             <div class="input-field col s6 m4">
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="rental1" value="1" />
+                                        <input type="checkbox" name="rental" value="1" />
                                         <span>Rental</span>
                                     </label>
                                 </p>
                                 <br>
                                 <p>
                                     <label>
-                                        <input type="checkbox" name="towing1" value="1" />
+                                        <input type="checkbox" name="towing" value="1" />
                                         <span>Towing</span>
                                     </label>
                                 </p>

@@ -71,7 +71,7 @@ function dataToVehicle(customerData, policyId, i) {
 
 
 function addVehicles(customerData, policyId) {
-  for (let i=0; i < customerData.vehicleCt; i++){
+  for (let i=1; i <= customerData.vehicleCt; i++){
    db.vehicle.create(dataToVehicle(customerData, policyId, i))
 }
 }
