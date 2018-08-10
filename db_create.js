@@ -79,11 +79,11 @@ function addVehicles(customerData, policyId) {
 function dataToTables(customerData, nextFn) {
 
 
-  Promise.resolve(db.customer.create(dataToCustomer(customerData))).then(
+ db.customer.create(dataToCustomer(customerData)).then(
     result => {
       let customerId = result.id;
       console.log("customer ID: " + customerId);
-      Promise.resolve(db.policy.create(dataToPolicy(customerData))).then(
+     db.policy.create(dataToPolicy(customerData)).then(
         result => {
           let policyId = result.id;
           Promise.all([
@@ -97,3 +97,5 @@ function dataToTables(customerData, nextFn) {
 }
 
 exports.dataToTables = dataToTables;
+
+

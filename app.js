@@ -160,7 +160,7 @@ app.get("/customer", function(request, response) {
 
 app.post("/success", function(request, response, next) {
   let customerData = request.body;
-  console.table(customerData);
+  console.dir(customerData);
 
   Promise.resolve(db_create.dataToTables(customerData))
     .then(result => {
