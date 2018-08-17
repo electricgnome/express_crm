@@ -124,8 +124,8 @@ function materialize() {
       verify_vin(document.getElementById(`vin${active_car}`).value, active_car);
     });
 
-//   document.getElementById("driverCt").value = drivers;
-//   document.getElementById("vehicleCt").value = cars;
+  document.getElementById("driverCt").value = drivers;
+  document.getElementById("vehicleCt").value = cars;
 }
 
 // Nissan 1N4AL3AP6DN452526
